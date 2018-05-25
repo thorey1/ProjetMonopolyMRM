@@ -1,7 +1,9 @@
 package Model;
 
+import Enum.Couleur;
+
 public class Terrain extends Carreau {
-	private int _prix;
-	private Couleur _couleur;
-	private Joueur _proprietaire;
+	private int prix;
+	private Couleur couleur;
+	private Joueur proprietaire;
 }

@@ -1,18 +1,17 @@
 package Controler;
 
-import Model.Carreau;
-import Model.Carte;
-import Model.Joueur;
-import java.util.Vector;
-import View.VuePlateau;
-import View.VueJoueur;
+import Enum.TypeCarreau;
+import Model.*;
+import View.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Controler {
-	private Vector<Joueur> _joueurs = new Vector<Joueur>();
-	public VuePlateau _vuePlateau;
-	public VueJoueur _vueJoueur;
-	private Carte _cartes;
-	private Carreau _carreaux;
+	private HashMap<Integer, Joueur> joueurs;
+	public VuePlateau vuePlateau;
+	public VueJoueur vueJoueur;
+	private HashMap<Integer, Carte> cartes;
+	private HashMap<Integer, Carreau> carreaux;
 
 	public void deplacement() {
 		throw new UnsupportedOperationException();
@@ -22,15 +21,15 @@ public class Controler {
 		throw new UnsupportedOperationException();
 	}
 
-	public Carreau getCarreau(Object aPosition) {
+	public Carreau getCarreau(Carreau position) {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getCarteAlea(Object aCollecC) {
+	public int getCarteAlea(ArrayList<Carte> cartes) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Carte getCarte(Object aNumCarte) {
+	public Carte getCarte(int numCarte) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -38,7 +37,7 @@ public class Controler {
 		throw new UnsupportedOperationException();
 	}
 
-	public void getCartes(Object aT) {
+	public ArrayList<Carte> getCartes(TypeCarreau tc) {
 		throw new UnsupportedOperationException();
 	}
 

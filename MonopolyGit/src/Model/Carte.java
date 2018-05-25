@@ -1,6 +1,8 @@
 package Model;
 
+import Enum.TypeCarreau;
+
 public class Carte {
-	private int _numCarte;
-	private TypeCarreau _type;
+	private int numCarte;
+	private TypeCarreau type;
 }

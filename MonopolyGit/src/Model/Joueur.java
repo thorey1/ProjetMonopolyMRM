@@ -1,24 +1,24 @@
 package Model;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Joueur {
-	private int _numJoueur;
-	private String _nomJoueur;
-	private int _solde;
-	private boolean _prisonnier;
-	private Carreau _position;
-	private Vector<Terrain> _terrains = new Vector<Terrain>();
+	private int numJoueur;
+	private String nomJoueur;
+	private int solde;
+	private boolean prisonnier;
+	private Carreau position;
+	private ArrayList<Terrain> terrains;
 
 	public boolean getPrison() {
 		throw new UnsupportedOperationException();
 	}
 
 	public Carreau getPosition() {
-		return this._position;
+		return this.position;
 	}
 
-	public void setPosition(Object aP) {
+	public void setPosition(Carreau position) {
 		throw new UnsupportedOperationException();
 	}
 }
