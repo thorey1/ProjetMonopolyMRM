@@ -21,16 +21,17 @@ public class Controler {
 		throw new UnsupportedOperationException();
 	}
 
-	public Carreau getCarreau(Carreau position) {
-		throw new UnsupportedOperationException();
+	public Carreau getCarreau(int position) {
+		return carreaux.get(position);
 	}
 
-	public int getCarteAlea(ArrayList<Carte> cartes) {
-		throw new UnsupportedOperationException();
+	public int getCarteAlea(ArrayList<Carte> pileCartes) {
+		int nbcartes = pileCartes.size();
+                return (int) ((Math.random()*nbcartes)+1);
 	}
 
 	public Carte getCarte(int numCarte) {
-		throw new UnsupportedOperationException();
+		return cartes.get(numCarte);
 	}
 
 	public void appliquerAction() {
@@ -41,8 +42,8 @@ public class Controler {
 		throw new UnsupportedOperationException();
 	}
 
-	public Joueur getJoueur() {
-		throw new UnsupportedOperationException();
+	public Joueur getJoueur(int numJoueur) {
+		return joueurs.get(numJoueur);
 	}
 
 	public void traiterMessage() {
@@ -50,15 +51,13 @@ public class Controler {
 	}
 
 	public int lancerDe() {
-		throw new UnsupportedOperationException();
-	}
+		return (int) ((Math.random()*6)+1);
+        }
 
 	public int getNewPosition() {
 		throw new UnsupportedOperationException();
-	}
+	} 
+       
         
-        
-        // BONJOUR JUI MORT
-        //niklabac
         
 }

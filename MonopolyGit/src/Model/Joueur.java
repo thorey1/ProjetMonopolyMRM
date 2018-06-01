@@ -11,7 +11,7 @@ public class Joueur {
 	private ArrayList<Terrain> terrains;
 
 	public boolean getPrison() {
-		throw new UnsupportedOperationException();
+		return prisonnier;
 	}
 
 	public Carreau getPosition() {
@@ -19,6 +19,52 @@ public class Joueur {
 	}
 
 	public void setPosition(Carreau position) {
-		throw new UnsupportedOperationException();
+		this.position=position;
 	}
+
+        /**
+         * @return the numJoueur
+         */
+        public int getNumJoueur() {
+            return numJoueur;
+        }
+
+        /**
+         * @param numJoueur the numJoueur to set
+         */
+        public void setNumJoueur(int numJoueur) {
+            this.numJoueur = numJoueur;
+        }
+
+        /**
+         * @return the nomJoueur
+         */
+        public String getNomJoueur() {
+            return nomJoueur;
+        }
+
+        /**
+         * @param nomJoueur the nomJoueur to set
+         */
+        public void setNomJoueur(String nomJoueur) {
+            this.nomJoueur = nomJoueur;
+        }
+
+        /**
+         * @return the solde
+         */
+        public int getSolde() {
+            return solde;
+        }
+
+        /**
+         * @param solde the solde to set
+         */
+        public void setSolde(int solde) {
+            this.solde = solde;
+        }
+        
+        public void addPropriétés (Terrain prop){
+            this.terrains.add(prop);
+        }
 }
