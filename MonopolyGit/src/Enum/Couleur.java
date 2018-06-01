@@ -8,7 +8,6 @@ public enum Couleur {
    BLEUCIEL,
    JAUNE,
    VERT,
-   ROUGE,
-   
+   ROUGE  
    
 }
