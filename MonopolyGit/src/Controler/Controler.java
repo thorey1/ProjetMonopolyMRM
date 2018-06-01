@@ -58,7 +58,6 @@ public class Controler {
 	}
         
         
-        // BONJOUR JUI MORT
-        //niklabac
+
         
 }
