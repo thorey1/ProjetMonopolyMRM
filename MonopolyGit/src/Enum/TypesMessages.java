@@ -11,4 +11,5 @@ package Enum;
  */
 public enum TypesMessages {
     
+    
 }
