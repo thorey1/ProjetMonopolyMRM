@@ -18,7 +18,10 @@ public class Controler {
 	}
 
 	public Carte tirerCarte() {
-		throw new UnsupportedOperationException();
+            
+            
+            
+            return cartes.get(this.getCarteAlea(cartes.size()));
 	}
 
 	public Carreau getCarreau(int position) {
@@ -39,9 +42,15 @@ public class Controler {
 	}
 
 	public ArrayList<Carte> getCartes(TypeCarreau tc) {
-		throw new UnsupportedOperationException();
-	}
-
+            ArrayList pilecarte = new ArrayList();
+            for (int i=0;i<cartes.size();i++){
+                if (cartes.get(i).getTypeCarte()==tc){
+                    pilecarte.add(cartes.get(i));
+                }
+            }
+            return pilecarte;
+        }       
+                
 	public Joueur getJoueur(int numJoueur) {
 		return joueurs.get(numJoueur);
 	}
