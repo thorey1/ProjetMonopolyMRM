@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Controler {
 	private HashMap<Integer, Joueur> joueurs;
 	public VuePlateau vuePlateau;
-	public VueJoueur vueJoueur;
+	public VueJoueurEtudiant vueJoueur;
 	private HashMap<Integer, Carte> cartes;
 	private HashMap<Integer, Carreau> carreaux;
 
