@@ -14,6 +14,7 @@ public class Carreau {
         this.numCarreau = numCarreau;
         this.nomCarreau = nomCarreau;
         this.type = type;
+        joueurs = new ArrayList();
     }
 
     public TypeCarreau getTypeCarreau() {

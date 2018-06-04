@@ -38,7 +38,7 @@ public class Controler {
 	}
 
 	public Carte getCarte(int numCarte){
-		return cartes.get(numCarte);
+            return cartes.get(numCarte);
 	}
 
 	public void appliquerAction() {
