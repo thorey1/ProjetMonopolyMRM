@@ -1,4 +1,4 @@
-package view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,8 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
-import util.Parameters;
-import util.Utils.Pion;
+import util.UtilsMono.Pion;
+
 
  
 public class VueJoueurEtudiant  {
