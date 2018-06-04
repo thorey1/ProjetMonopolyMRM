@@ -10,8 +10,8 @@ public class Carreau {
 	private TypeCarreau type;
 	private ArrayList<Joueur> joueurs;
 
-	public String getTypeCarreau() {
-		throw new UnsupportedOperationException();
+	public TypeCarreau getTypeCarreau() {
+		return type;
 	}
 
 	public int getNumCarreau() {

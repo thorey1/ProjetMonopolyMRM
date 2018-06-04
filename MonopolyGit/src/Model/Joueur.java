@@ -9,6 +9,7 @@ public class Joueur {
 	private boolean prisonnier;
 	private Carreau position;
 	private ArrayList<Terrain> terrains;
+        private boolean tour;
 
 	public boolean getPrison() {
 		return prisonnier;
@@ -66,5 +67,9 @@ public class Joueur {
         
         public void addPropriétés (Terrain prop){
             this.terrains.add(prop);
+        }
+
+        public boolean getTour() {
+            return tour;
         }
 }

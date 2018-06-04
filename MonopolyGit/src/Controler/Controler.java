@@ -18,22 +18,26 @@ public class Controler {
 	}
 
 	public Carte tirerCarte() {
-            
-            
-            
-            return cartes.get(this.getCarteAlea(cartes.size()));
+            ArrayList pilecartes = this.getCartes(this.getJoueur().getPosition().getTypeCarreau());
+            return this.getCarteAlea(pilecartes);
 	}
 
 	public Carreau getCarreau(int position) {
 		return carreaux.get(position);
 	}
 
-	public int getCarteAlea(ArrayList<Carte> pileCartes) {
+	public Carte getCarteAlea(ArrayList<Carte> pileCartes) {
 		int nbcartes = pileCartes.size();
-                return (int) ((Math.random()*nbcartes)+1);
+                Carte carte = null;
+                for (int i = 0 ; i<nbcartes ; i++){
+                    if ( i== (int) (Math.random()*nbcartes)){
+                        carte = pileCartes.get(i);
+                    }
+                }
+                return carte;       
 	}
 
-	public Carte getCarte(int numCarte) {
+	public Carte getCarte(int numCarte){
 		return cartes.get(numCarte);
 	}
 
@@ -51,8 +55,14 @@ public class Controler {
             return pilecarte;
         }       
                 
-	public Joueur getJoueur(int numJoueur) {
-		return joueurs.get(numJoueur);
+	public Joueur getJoueur() {
+            Joueur j = null;
+            for (int i = 0;i<joueurs.size();i++){
+                if (joueurs.get(i).getTour()){
+                    j = joueurs.get(i);
+                }
+            }
+            return j;
 	}
 
 	public void traiterMessage() {
