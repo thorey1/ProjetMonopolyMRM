@@ -7,7 +7,6 @@ public enum TypeCarreau {
     SPECIAL,
     MALUS,
     TERRAIN,
-    CHANCE,
-    COMMUNAUTE
+   
     
 }
