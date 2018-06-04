@@ -6,7 +6,7 @@ public enum TypeCarreau {
     TIRAGE,
     SPECIAL,
     MALUS,
-    TERRAIN,
+    TERRAIN
    
     
 }
