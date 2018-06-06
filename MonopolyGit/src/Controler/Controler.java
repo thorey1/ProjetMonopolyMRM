@@ -146,5 +146,7 @@ public class Controler {
     private Terrain t38 = new Terrain(38,"Avenue des Champs-Elysées",TERRAIN,350,BLEUFONCE); 
     
     private Terrain t40 = new Terrain(40,"Rue de la Paix",TERRAIN,400,BLEUFONCE);    
+    
+    //KDO
   
 }
