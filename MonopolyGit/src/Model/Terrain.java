@@ -1,7 +1,6 @@
 package Model;
 
-import Enum.Couleur;
-import Enum.TypeCarreau;
+import Controler.UtilsMono.*;
 
 public class Terrain extends Carreau {
     private int prix;
@@ -32,6 +31,7 @@ public class Terrain extends Carreau {
     public Joueur getProprietaire() {
         return proprietaire;
     }
-        
+
+    
         
 }
