@@ -1,6 +1,6 @@
 package Model;
 
-import Enum.TypeCarreau;
+import Controler.UtilsMono.*;
 
 public class Malus extends Carreau {
     private int taxe;
@@ -13,7 +13,9 @@ public class Malus extends Carreau {
     public int getTaxe() {
         return taxe;
     }
+
     
+
     
     
 }
