@@ -12,7 +12,13 @@ import Enum.TypesMessages;
  * @author hassanyo
  */
 public class Message {
+    
+    
     public TypesMessages type;  // type de message
+   
     
-    
+    public Message(TypesMessages m ){
+        this.type=m;
+       
+    }
 }

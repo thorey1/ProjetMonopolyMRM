@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Enum;
+
+package Controler;
 
 /**
  *
- * @author hassanyo
+ * @author laurillau
  */
-public enum TypesMessages {
-    JOUER,
-    ACHETER,
-    AUTRE,
-    FIN_TOUR        
+public interface Observateur {
+    public void traiterMessage(Message m);
 }

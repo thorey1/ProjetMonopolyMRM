@@ -28,6 +28,10 @@ public abstract class Carreau {
     public String getNomCarreau() {
         return nomCarreau;
     }
+    
+    public void addJoueur(Joueur j){
+        joueurs.add(j);
+    }
 
         
         

@@ -1,10 +1,11 @@
 package View;
 
+import Controler.Message;
+import Controler.Observateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,10 +17,13 @@ import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
 import Controler.UtilsMono.Pion;
+import Enum.TypesMessages;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
- 
-public class VueJoueurEtudiant  {
+
+public class VueJoueurEtudiant implements Observe {
      
     private JPanel panelBoutons ;
     private JPanel panelCentre ;
@@ -76,6 +80,14 @@ public class VueJoueurEtudiant  {
         this.btnAutreAction = new JButton("AutreAction") ;
         this.btnTerminerTour = new JButton("Terminer Tour") ;
         
+           btnAller.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Message m = new Message(TypesMessages.JOUER);
+                notifierObservateur(m);
+            }
+        });
+        
         this.panelBoutons.add(btnAller);
         this.panelBoutons.add(btnAcheter);
         this.panelBoutons.add(btnAutreAction);
@@ -110,6 +122,18 @@ public class VueJoueurEtudiant  {
      public static void main(String [] args) {
         // Instanciation de la fenêtre 
         VueJoueurEtudiant vueJoueur = new VueJoueurEtudiant("Manon",Pion.ROUGE.getCouleur() );
+    }
+     private Observateur observateur;
+    @Override
+    public void addObservateur(Observateur o) {
+        this.observateur=o;
+    }
+
+    @Override
+    public void notifierObservateur(Message m) {
+        if (observateur != null) {
+            observateur.traiterMessage(m);
+        }
     }
 }
 

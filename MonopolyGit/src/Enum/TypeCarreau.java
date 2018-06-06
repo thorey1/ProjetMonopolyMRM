@@ -3,11 +3,11 @@ package Enum;
 public enum TypeCarreau {
     GARE,
     COMPAGNIE,
-    SPECIAL,
+    DEPART,
     MALUS,
     TERRAIN,
     CHANCE,
-    COMMUNAUTE
-   
-    
+    COMMUNAUTE,
+    PRISON,
+    PARC
 }
