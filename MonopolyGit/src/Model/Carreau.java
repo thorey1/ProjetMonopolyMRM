@@ -1,10 +1,10 @@
 package Model;
 
-import Enum.TypeCarreau;
+import Controler.UtilsMono.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Carreau {
+public abstract class Carreau {
     private int numCarreau;
     private String nomCarreau;
     private TypeCarreau type;
@@ -28,6 +28,7 @@ public class Carreau {
     public String getNomCarreau() {
         return nomCarreau;
     }
+
         
         
 }

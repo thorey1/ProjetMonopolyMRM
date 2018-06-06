@@ -1,8 +1,9 @@
 package Model;
 
 
-import Enum.TypeCarreau;
-import static Enum.TypeCarreau.*;
+import Controler.UtilsMono.*;
+import static Controler.UtilsMono.TypeCarreau.*;
+
 
 public class Carte {
 	private int numCarte;

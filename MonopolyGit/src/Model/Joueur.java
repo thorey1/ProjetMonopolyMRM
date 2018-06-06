@@ -14,6 +14,11 @@ public class Joueur {
 	public boolean getPrison() {
 		return prisonnier;
 	}
+        
+        public void setPrison(boolean prison) {
+		prisonnier=prison;
+                
+	}
 
 	public Carreau getPosition() {
 		return this.position;
