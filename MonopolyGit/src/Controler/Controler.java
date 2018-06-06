@@ -22,7 +22,18 @@ public class Controler {
         
 
     public void deplacement() {
-            throw new UnsupportedOperationException();
+            boolean ddouble = true;
+            Joueur j = this.getJoueur();
+            
+            while(ddouble){
+                ddouble = false;
+                int d1 = this.lancerDe();
+                int d2 = this.lancerDe();
+                
+                if(d1==d2){
+                    ddouble=true;
+                }
+            }
     }
 
     public Carte tirerCarte() {
