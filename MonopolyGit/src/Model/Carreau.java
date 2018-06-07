@@ -32,6 +32,8 @@ public abstract class Carreau {
     public void addJoueur(Joueur j){
         joueurs.add(j);
     }
+    
+
 
         
         

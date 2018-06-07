@@ -49,9 +49,10 @@ public class Controler implements Observateur {
                 }
                 
                 int pos=j.getPosition().getNumCarreau();
-                j.setPosition(carreaux.get(pos));
+                j.setPosition(carreaux.get(pos+d1+d2));
                 
                 //faireAction(carreaux.get(pos), j);
+                
             }
     }
 
@@ -204,7 +205,6 @@ public class Controler implements Observateur {
         return casecar;
     }
 
-    
     
 
     @Override

@@ -1,5 +1,6 @@
 package Model;
 
+import Controler.UtilsMono.*;
 import java.util.ArrayList;
 
 public class Joueur {
@@ -8,7 +9,7 @@ public class Joueur {
 	private int solde;
 	private boolean prisonnier;
 	private Carreau position;
-	private ArrayList<Terrain> terrains;
+	private ArrayList<Terrain> proprietes;
         private boolean tour;
 
 	public boolean getPrison() {
@@ -71,10 +72,53 @@ public class Joueur {
         }
         
         public void addPropriétés (Terrain prop){
-            this.terrains.add(prop);
+            this.proprietes.add(prop);
         }
 
         public boolean getTour() {
             return tour;
         }
+        
+        public int getNbProp(Terrain t){
+            int nb = 0;
+            Couleur c;
+            TypeCarreau tc = t.getTypeCarreau();
+            
+            if(tc == TypeCarreau.GARE || tc == TypeCarreau.COMPAGNIE){              
+                for(Terrain terter : proprietes){             
+                    if(terter.getTypeCarreau() == tc){
+                        nb++;
+                    }
+                }
+            }
+            else if(tc == TypeCarreau.TERRAIN){
+                c = t.getCouleur();
+                for(Terrain terter : proprietes){             
+                    if(terter.getCouleur()== c){
+                        nb++;
+                    }
+                }
+            }
+            return nb;
+        }
+        
+        public void payerLoyer(int loyer){
+            setSolde(solde-loyer); 
+        }
+        
+        public void gainLoyer(int loyer){
+            setSolde(solde+loyer);
+        }
+        
+        public void payerGare(int prixGare){
+            setSolde(solde-prixGare);
+        }
+        
+        public void payerCompagnie(int prixCompagnie){
+            setSolde(solde-prixCompagnie);
+        }
+        
+        public void payerPropriete(int prixPropriete){
+            setSolde(solde-prixPropriete);
+        } 
 }
