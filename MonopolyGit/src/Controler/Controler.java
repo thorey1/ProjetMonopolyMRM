@@ -21,11 +21,36 @@ public class Controler implements Observateur {
         this.vueJoueur = vueJoueur;
         cartes = new HashMap();
         carreaux = new HashMap();
+        joueurs = new HashMap();
         
         for (int i=1;i<=this.InitialiserHashMapCarreaux().size();i++){
             carreaux.put(i, this.InitialiserHashMapCarreaux().get(i-1));
         }
-    }        
+    }     
+    
+    
+    // POUR TEST JEU
+    public Controler() {
+        cartes = new HashMap();
+        carreaux = new HashMap();
+        joueurs = new HashMap();
+        
+        for (int i=1;i<=this.InitialiserHashMapCarreaux().size();i++){
+            carreaux.put(i, this.InitialiserHashMapCarreaux().get(i-1));
+        }
+    }  
+
+    public HashMap<Integer, Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public HashMap<Integer, Carte> getCartes() {
+        return cartes;
+    }
+
+    public HashMap<Integer, Carreau> getCarreaux() {
+        return carreaux;
+    }
         
 
     public void deplacement() {
@@ -45,6 +70,7 @@ public class Controler implements Observateur {
                 if (compteur==3){
                     j.setPrison(true);
                     j.setPosition(carreaux.get(11)); 
+                    System.out.println("Vous avez fais 3 double, vous allez directement en prison");
                     break;
                 }
                 
@@ -204,7 +230,7 @@ public class Controler implements Observateur {
         casecar.add(t40);
         return casecar;
     }
-
+    
     
 
     @Override

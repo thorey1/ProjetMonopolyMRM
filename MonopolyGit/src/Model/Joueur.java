@@ -12,6 +12,18 @@ public class Joueur {
 	private ArrayList<Terrain> proprietes;
         private boolean tour;
 
+        public Joueur(int numJoueur, String nomJoueur, Carreau position) {
+            this.numJoueur = numJoueur;
+            this.nomJoueur = nomJoueur;
+            this.solde = 5000;
+            this.prisonnier = false;
+            setPosition(position);
+            terrains = new ArrayList();
+        }
+       
+        
+        
+        
 	public boolean getPrison() {
 		return prisonnier;
 	}
