@@ -203,9 +203,7 @@ public class Controler implements Observateur {
         casecar.add(t40);
         return casecar;
     }
-
-    
-    
+ 
 
     @Override
     public void traiterMessage(Message m) {
