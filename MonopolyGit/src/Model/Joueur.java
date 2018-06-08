@@ -18,7 +18,7 @@ public class Joueur {
             this.solde = 5000;
             this.prisonnier = false;
             setPosition(position);
-            terrains = new ArrayList();
+            proprietes = new ArrayList();
         }
        
         

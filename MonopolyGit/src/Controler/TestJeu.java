@@ -20,15 +20,23 @@ public class TestJeu {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    
+    public static void main(String[] args){
        
+        
 
         Controler c = new Controler();
-        Joueur j1 = new Joueur(1, "Malo", c.getCarreaux().get(1));
+        
+        //Joueur j1 = new Joueur(1, "Malo", c.getCarreaux().get(1));
        
-        c.commencerJeu();   
+         c.commencerJeu();   
         
-        
+       
     }
+    
+    
+    
+    
+    
     
 }

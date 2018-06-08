@@ -8,6 +8,7 @@ import Model.*;
 import View.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Controler implements Observateur {
     private HashMap<Integer, Joueur> joueurs;
@@ -53,17 +54,85 @@ public class Controler implements Observateur {
     }
         
 
-    public void deplacement() {
+    public void deplacement(Joueur j) {
             boolean ddouble = true;
             int compteur=0;
-            Joueur j = this.getJoueur();
+            System.out.println("Au tour de " + j.getNomJoueur());
+            
+            if (j.getPrison()){
+                System.out.println("Tu dois faire un double pour sortir de prison ou payer 50€! \n Quel est ton choix?(payer/dé) ");
+                Scanner scanner = new Scanner(System.in);
+                String rep = scanner.nextLine();
+                if ("dé".equals(rep)){
+                    System.out.println("Presser entrée pour lancer le premier dé"+ "\n");
+                    this.pause();
+                    int d1 = this.lancerDe();
+                    System.out.println("Voici le premier dé : " + d1 + "\n");
+                    System.out.println("Presser entrée pour lancer le deuxième dé" + "\n");
+                    this.pause();
+                    int d2 = this.lancerDe();
+                    System.out.println("Voici le deuxième dé : " + d2 + "\n");
+                    
+                    if(d1==d2){
+                        System.out.println("Vous avez fait un double, vous sortez de prison !");
+                        j.setPrison(false);
+                        ddouble=false;
+                        Carreau newCar = (carreaux.get(11+d1+d2));
+                        j.setPosition(newCar);
+                        String nomProp = newCar.getNomCarreau();
+                        if(newCar.getTypeCarreau() == TypeCarreau.MALUS || newCar.getTypeCarreau() == TypeCarreau.CHANCE || newCar.getTypeCarreau() == TypeCarreau.COMMUNAUTE || newCar.getTypeCarreau() == TypeCarreau.DEPART || newCar.getTypeCarreau() == TypeCarreau.PRISON || newCar.getTypeCarreau() == TypeCarreau.PARC){
+                            System.out.println("Tu es sur la case " + nomProp);
+                        }
+                        else{
+                            Joueur proprio = newCar.getProprietaire();
+                            if(proprio == null){
+                                System.out.println("Tu es sur la propriété " + nomProp + "\n");  
+                                System.out.println("Veux-tu acheter(o/n) " + nomProp);
+                                scanner = new Scanner(System.in);
+                                rep = scanner.nextLine();
+                                if("o".equals(rep)){
+                                    int prixProp = newCar.getPrix();
+                                    j.payerPropriete(prixProp);
+                                    newCar.setProprietaire(j);
+                                    System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
+                                    System.out.println("Il te reste " + j.getSolde());
+                                }
+                            }else if(proprio!=null && proprio != j){
+                                System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
+                                j.payerLoyer(newCar.getLoyer());
+                                proprio.gainLoyer(newCar.getLoyer());
+                                System.out.println(j.getNomJoueur() + " perd " + newCar.getLoyer()+ ", Il te reste " + j.getSolde());
+                                System.out.println(proprio.getNomJoueur() + " gagne " + newCar.getLoyer() + "\n"); 
+                            }else{
+                                System.out.println("Tu es sur ta propriété! \n");
+                            }
+                        }
+                    }else{
+                        ddouble=false;
+                        System.out.println("Tu n'as pas fais de double \n Fin du tour \n");
+                    }
+                }else if("payer".equals(rep)){
+                    j.payerLoyer(50);
+                    j.setPrison(false);
+                    System.out.println("Tu as payé 50€!");
+                    ddouble=true;
+                }
+            }
             
             while(ddouble){
                 ddouble = false;
-                int d1 = this.lancerDe();
-                int d2 = this.lancerDe();
+                System.out.println("Presser entrée pour lancer le premier dé"+ "\n");
+                this.pause();
+                int d1 = 2;//this.lancerDe();
+                System.out.println("Voici le premier dé : " + d1 + "\n");
+                System.out.println("Presser entrée pour lancer le deuxième dé" + "\n");
+                this.pause();
+                int d2 = 1;//this.lancerDe();
+                System.out.println("Voici le deuxième dé : " + d2 + "\n");
+                
                 
                 if(d1==d2){
+                    System.out.println("Vous avez fait un double !");
                     ddouble=true;
                     compteur = compteur+1;
                 }
@@ -71,11 +140,62 @@ public class Controler implements Observateur {
                     j.setPrison(true);
                     j.setPosition(carreaux.get(11)); 
                     System.out.println("Vous avez fais 3 double, vous allez directement en prison");
+                    System.out.println("Fin du tour");
                     break;
                 }
                 
                 int pos=j.getPosition().getNumCarreau();
-                j.setPosition(carreaux.get(pos+d1+d2));
+                int newPos = pos+d1+d2;
+                Carreau newCar;
+                
+                if(j.getPosition().getNumCarreau()+d1+d2> carreaux.size()){
+                    newCar = carreaux.get(newPos%carreaux.size());
+                    j.setPosition(newCar);
+                    System.out.println("Passage par la case départ, tu gagnes 200€!! \n \t Bilan solde : " + j.getSolde() +"\n");
+                    j.gainLoyer(200);
+                }else{
+                    newCar = carreaux.get(newPos);
+                    j.setPosition(newCar);
+                }         
+                
+                
+                
+                
+                String nomProp = newCar.getNomCarreau();
+                if(newCar.getTypeCarreau() == TypeCarreau.MALUS || newCar.getTypeCarreau() == TypeCarreau.CHANCE || newCar.getTypeCarreau() == TypeCarreau.COMMUNAUTE || newCar.getTypeCarreau() == TypeCarreau.DEPART || newCar.getTypeCarreau() == TypeCarreau.PARC){
+                    System.out.println("Tu es sur la case " + nomProp);
+                }else if(newCar.getTypeCarreau() == TypeCarreau.PRISON){
+                    j.setPrison(true);
+                    j.setPosition(carreaux.get(11));
+                    System.out.println("Tu es sur la case " + nomProp);
+                    System.out.println("Fin du tour \n");
+                    break;
+                }
+                else{
+                    Joueur proprio = newCar.getProprietaire();
+                    if(proprio == null){
+                        System.out.println("Tu es sur la propriété " + nomProp + "\n");  
+                        System.out.println("Veux-tu acheter(o/n) " + nomProp);
+                        Scanner scanner = new Scanner(System.in);
+                        String rep = scanner.nextLine();
+                        if("o".equals(rep)){
+                            int prixProp = newCar.getPrix();
+                            j.payerPropriete(prixProp);
+                            newCar.setProprietaire(j);
+                            System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
+                            System.out.println("Il te reste " + j.getSolde());
+                        }
+                    }else if(proprio!=null && proprio != j){
+                        System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
+                        j.payerLoyer(newCar.getLoyer());
+                        proprio.gainLoyer(newCar.getLoyer());
+                        System.out.println(j.getNomJoueur() + " perd " + newCar.getLoyer()+ ", Il te reste " + j.getSolde());
+                        System.out.println(proprio.getNomJoueur() + " gagne " + newCar.getLoyer() + "\n"); 
+                    }else{
+                        System.out.println("Tu es sur ta propriété! \n");
+                    }
+                }
+                System.out.println("Fin du tour \n");
                 
                 //faireAction(carreaux.get(pos), j);
                 
@@ -119,7 +239,7 @@ public class Controler implements Observateur {
 
     public Joueur getJoueur() {
         Joueur j = null;
-        for (int i = 0;i<joueurs.size();i++){
+        for (int i = 1;i<joueurs.size();i++){
             if (joueurs.get(i).getTour()){
                 j = joueurs.get(i);
             }
@@ -157,7 +277,7 @@ public class Controler implements Observateur {
         Special t8 = new Special(8,"Chance",CHANCE);
         Terrain t9 = new Terrain(9,"Rue de Courcelles",TERRAIN,100,BLEUCIEL);
         Terrain t10 = new Terrain(10,"Avenue de la République",TERRAIN,120,BLEUCIEL);
-        Special t11 = new Special(11,"En prison/Simple visite", PRISON);
+        Special t11 = new Special(11,"En prison/Simple visite", PARC);
         Terrain t12 = new Terrain(12,"Boulevard de la Villette",TERRAIN,140,VIOLET);
         Terrain t13 = new Terrain(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,GRIS);
         Terrain t14 = new Terrain(14,"Avenue de Neuilly",TERRAIN,140,VIOLET);
@@ -231,7 +351,36 @@ public class Controler implements Observateur {
         return casecar;
     }
     
+    public void pause(){
+        System.out.println("Press \"ENTER\" to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+    }
     
+    public void commencerJeu(){
+        Joueur j1 = new Joueur(1, "Malo", this.getCarreaux().get(1));
+        Joueur j2 = new Joueur(2, "Youssef", this.getCarreaux().get(1));
+        //Joueur j3 = new Joueur(3, "O'Neal", this.getCarreaux().get(1));
+        //Joueur j4 = new Joueur(4, "Rémi", this.getCarreaux().get(1));
+        //Joueur j5 = new Joueur(5, "Yann", this.getCarreaux().get(1));
+        //Joueur j6 = new Joueur(6, "Quentin", this.getCarreaux().get(1));
+        
+        
+        joueurs.put(1, j1);
+        joueurs.put(2, j2);
+        //joueurs.put(3, j3);
+        //joueurs.put(4, j4);
+        //joueurs.put(5, j5);
+        //joueurs.put(6, j6);
+        
+        for (int j=0; j<50;j++){
+            for (int i = 1; i<=joueurs.size();i++){
+                System.out.println("------------------------------------------------");
+                deplacement(joueurs.get(i));
+                System.out.println("------------------------------------------------");
+            }
+        }
+    }
 
     @Override
     public void traiterMessage(Message m) {

@@ -33,8 +33,12 @@ public abstract class Carreau {
         joueurs.add(j);
     }
     
+    public abstract int getPrix();
 
+    public abstract void setProprietaire(Joueur proprietaire);
+    
+    public abstract Joueur getProprietaire();
 
-        
+    public abstract int getLoyer();
         
 }
