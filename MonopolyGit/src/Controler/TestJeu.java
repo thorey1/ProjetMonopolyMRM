@@ -18,6 +18,7 @@ public class TestJeu {
     
     
     /**
+     * 
      * @param args the command line arguments
      */
     
@@ -28,7 +29,8 @@ public class TestJeu {
         Controler c = new Controler();
         
         //Joueur j1 = new Joueur(1, "Malo", c.getCarreaux().get(1));
-       
+    
+        
          c.commencerJeu();   
         
        
