@@ -1,9 +1,11 @@
 package Controler;
 
-import Controler.UtilsMono.*;
-import static Controler.UtilsMono.Couleur.*;
-import static Controler.UtilsMono.TypeCarreau.*;
-import Enum.TypesMessages;
+import java.awt.Color;
+
+import Enum.TypeCarreau;
+import static Enum.TypeCarreau.*;
+import static Enum.TypeCarte.*;
+import static Enum.TypesMessages.*;
 import Model.*;
 import View.*;
 import java.util.ArrayList;
@@ -16,8 +18,8 @@ public class Controler implements Observateur {
     public VueJoueurEtudiant vueJoueur;
     private HashMap<Integer, Carte> cartes;
     private HashMap<Integer, Carreau> carreaux;
-    private HashMap<Couleur, Maison> maisons;
-    private HashMap<Couleur, Hotel> hotels;
+    private HashMap<Color, Maison> maisons;
+    private HashMap<Color, Hotel> hotels;
 
     public Controler(HashMap<Integer, Joueur> joueurs, VuePlateau vuePlateau, VueJoueurEtudiant vueJoueur, HashMap<Integer, Carte> cartes, HashMap<Integer, Carreau> carreaux) {
         this.vuePlateau = vuePlateau;
@@ -26,8 +28,8 @@ public class Controler implements Observateur {
         carreaux = new HashMap();
         joueurs = new HashMap();
         
-        for (int i=1;i<=this.InitialiserHashMapCarreaux().size();i++){
-            carreaux.put(i, this.InitialiserHashMapCarreaux().get(i-1));
+        for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
+            carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
         }
         
     }     
@@ -43,8 +45,8 @@ public class Controler implements Observateur {
         hotels = new HashMap();
         hotels = InitialiserHashMapHotel();
         
-        for (int i=1;i<=this.InitialiserHashMapCarreaux().size();i++){
-            carreaux.put(i, this.InitialiserHashMapCarreaux().get(i-1));
+        for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
+            carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
         }
     }  
 
@@ -244,7 +246,7 @@ public class Controler implements Observateur {
     public ArrayList<Carte> getCartes(TypeCarreau tc) {
         ArrayList pilecarte = new ArrayList();
         for (int i=0;i<cartes.size();i++){
-            if (cartes.get(i).getTypeCarte()==tc){
+            if (cartes.get(i).getCar()==tc){
                 pilecarte.add(cartes.get(i));
             }
         }
@@ -271,56 +273,62 @@ public class Controler implements Observateur {
     
     
     private void faireAction(Message m) {
-        if (m.type==TypesMessages.JOUER){
-         
+        if(m.type==JOUER){
+            
+        }else if(m.type==TIRER_CARTE){
+            //if (m.type==ACTION){
+                
+            //}  
         }
     }
+    
+    //private void faireActionCarte
    
 // public int getNewPosition() {
      //       throw new UnsupportedOperationException();
     //}
     
-    public ArrayList<Carreau> InitialiserHashMapCarreaux(){
+    public ArrayList<Carreau> initialiserHashMapCarreaux(){
         Special t1 = new Special(1,"Départ",DEPART);
-        Terrain t2 = new Propriete(2,"Boulevard de Belleville",TERRAIN,60,MAUVE);
+        Terrain t2 = new Propriete(2,"Boulevard de Belleville",PROPRIETE,60,Color.pink);
         Special t3 = new Special(3,"Caisse de communauté",COMMUNAUTE);
-        Terrain t4 = new Propriete(4,"Rue Lecourbe",TERRAIN,60,MAUVE);
+        Terrain t4 = new Propriete(4,"Rue Lecourbe",PROPRIETE,60,Color.pink);
         Malus t5 = new Malus(5, "Impôts sur le revenu", MALUS, 200);
         Terrain t6 = new Propriete(6, "Gare Montparnasse", GARE, 200,null);
-        Terrain t7 = new Propriete(7,"Rue de Vaugirard",TERRAIN,100,BLEUCIEL);
+        Terrain t7 = new Propriete(7,"Rue de Vaugirard",PROPRIETE,100,Color.cyan);
         Special t8 = new Special(8,"Chance",CHANCE);
-        Terrain t9 = new Propriete(9,"Rue de Courcelles",TERRAIN,100,BLEUCIEL);
-        Terrain t10 = new Propriete(10,"Avenue de la République",TERRAIN,120,BLEUCIEL);
+        Terrain t9 = new Propriete(9,"Rue de Courcelles",PROPRIETE,100,Color.cyan);
+        Terrain t10 = new Propriete(10,"Avenue de la République",PROPRIETE,120,Color.cyan);
         Special t11 = new Special(11,"En prison/Simple visite", PARC);
-        Terrain t12 = new Propriete(12,"Boulevard de la Villette",TERRAIN,140,VIOLET);
-        Terrain t13 = new Propriete(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,GRIS);
-        Terrain t14 = new Propriete(14,"Avenue de Neuilly",TERRAIN,140,VIOLET);
-        Terrain t15 = new Propriete(15,"Rue de Paradis",TERRAIN,160,VIOLET);
+        Terrain t12 = new Propriete(12,"Boulevard de la Villette",PROPRIETE,140,Color.magenta);
+        Terrain t13 = new Propriete(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,Color.gray);
+        Terrain t14 = new Propriete(14,"Avenue de Neuilly",PROPRIETE,140,Color.magenta);
+        Terrain t15 = new Propriete(15,"Rue de Paradis",PROPRIETE,160,Color.magenta);
         Terrain t16 = new Propriete(16, "Gare de Lyon", GARE, 200,null);
-        Terrain t17 = new Propriete(17,"Avenue Mozart",TERRAIN,180,ORANGE);
+        Terrain t17 = new Propriete(17,"Avenue Mozart",PROPRIETE,180,Color.orange);
         Special t18 = new Special(18,"Caisse de communauté",COMMUNAUTE);
-        Terrain t19 = new Propriete(19,"Boulevard Saint-Michel",TERRAIN,180,ORANGE);
-        Terrain t20 = new Propriete(20,"Place Pigalle",TERRAIN,200,ORANGE);
+        Terrain t19 = new Propriete(19,"Boulevard Saint-Michel",PROPRIETE,180,Color.orange);
+        Terrain t20 = new Propriete(20,"Place Pigalle",PROPRIETE,200,Color.orange);
         Special t21 = new Special(21,"Parc Gratuit",PARC);
-        Terrain t22 = new Propriete(22,"Avenue Matignon",TERRAIN,220,ROUGE);
+        Terrain t22 = new Propriete(22,"Avenue Matignon",PROPRIETE,220,Color.red);
         Special t23 = new Special(23,"Chance",CHANCE);
-        Terrain t24 = new Propriete(24,"Boulevard Malesherbes",TERRAIN,220,ROUGE);
-        Terrain t25 = new Propriete(25,"Avenue Henri-Martin",TERRAIN,240,ROUGE);
+        Terrain t24 = new Propriete(24,"Boulevard Malesherbes",PROPRIETE,220,Color.red);
+        Terrain t25 = new Propriete(25,"Avenue Henri-Martin",PROPRIETE,240,Color.red);
         Terrain t26 = new Propriete(26, "Gare du Nord", GARE, 200,null);
-        Terrain t27 = new Propriete(27,"Faubourg Saint-Honoré",TERRAIN,260,JAUNE);
-        Terrain t28 = new Propriete(28,"Place de la Bourse",TERRAIN,260,JAUNE);
-        Terrain t29 = new Propriete(29, "Compagnie de distribution des eaux",COMPAGNIE,150,GRIS);
-        Terrain t30 = new Propriete(30,"Rue de la Fayette",TERRAIN,280,JAUNE); 
+        Terrain t27 = new Propriete(27,"Faubourg Saint-Honoré",PROPRIETE,260,Color.yellow);
+        Terrain t28 = new Propriete(28,"Place de la Bourse",PROPRIETE,260,Color.yellow);
+        Terrain t29 = new Propriete(29, "Compagnie de distribution des eaux",COMPAGNIE,150,Color.gray);
+        Terrain t30 = new Propriete(30,"Rue de la Fayette",PROPRIETE,280,Color.yellow); 
         Special t31 = new Special(31,"Allez en Prison",PRISON);
-        Terrain t32 = new Propriete(32,"Avenue de Breteuil",TERRAIN,300,VERT);    
-        Terrain t33 = new Propriete(33,"Avenue Foch",TERRAIN,300,VERT);    
+        Terrain t32 = new Propriete(32,"Avenue de Breteuil",PROPRIETE,300,Color.green);    
+        Terrain t33 = new Propriete(33,"Avenue Foch",PROPRIETE,300,Color.green);    
         Special t34 = new Special(34,"Caisse de communauté",COMMUNAUTE);
-        Terrain t35 = new Propriete(35,"Boulevard des Capucines",TERRAIN,320,VERT);   
+        Terrain t35 = new Propriete(35,"Boulevard des Capucines",PROPRIETE,320,Color.green);   
         Terrain t36 = new Propriete(36, "Gare Saint-Lazare", GARE, 200,null);
         Special t37 = new Special(37,"Chance",CHANCE);
-        Terrain t38 = new Propriete(38,"Avenue des Champs-Elysées",TERRAIN,350,BLEUFONCE); 
+        Terrain t38 = new Propriete(38,"Avenue des Champs-Elysées",PROPRIETE,350,Color.blue); 
         Malus t39 = new Malus(39, "Taxe de Luxe", MALUS, 200);
-        Terrain t40 = new Propriete(40,"Rue de la Paix",TERRAIN,400,BLEUFONCE);    
+        Terrain t40 = new Propriete(40,"Rue de la Paix",PROPRIETE,400,Color.blue);    
         ArrayList<Carreau> casecar = new ArrayList();
         casecar.add(t1);
         casecar.add(t2);
@@ -365,50 +373,50 @@ public class Controler implements Observateur {
         return casecar;
     }
     
-    public HashMap<Couleur, Maison> InitialiserHashMapMaison(){
-        Maison m1 = new Maison(Couleur.MAUVE, 50);
-        Maison m2 = new Maison(Couleur.BLEUCIEL, 50);
-        Maison m3 = new Maison(Couleur.VIOLET, 100);
-        Maison m4 = new Maison(Couleur.ORANGE, 100);
-        Maison m5 = new Maison(Couleur.ROUGE, 150);
-        Maison m6 = new Maison(Couleur.JAUNE, 150);
-        Maison m7 = new Maison(Couleur.VERT, 200);
-        Maison m8 = new Maison(Couleur.BLEUFONCE, 200);
+    public HashMap<Color, Maison> InitialiserHashMapMaison(){
+        Maison m1 = new Maison(Color.pink, 50);
+        Maison m2 = new Maison(Color.cyan, 50);
+        Maison m3 = new Maison(Color.magenta, 100);
+        Maison m4 = new Maison(Color.orange, 100);
+        Maison m5 = new Maison(Color.red, 150);
+        Maison m6 = new Maison(Color.yellow, 150);
+        Maison m7 = new Maison(Color.green, 200);
+        Maison m8 = new Maison(Color.blue, 200);
         
-        HashMap<Couleur, Maison> maisons = new HashMap();
+        HashMap<Color, Maison> maisons = new HashMap();
         
-        maisons.put(Couleur.MAUVE, m1);
-        maisons.put(Couleur.BLEUCIEL, m2);
-        maisons.put(Couleur.VIOLET, m3);
-        maisons.put(Couleur.ORANGE, m4);
-        maisons.put(Couleur.ROUGE, m5);
-        maisons.put(Couleur.JAUNE, m6);
-        maisons.put(Couleur.VERT, m7);
-        maisons.put(Couleur.BLEUFONCE, m8);
+        maisons.put(Color.pink, m1);
+        maisons.put(Color.cyan, m2);
+        maisons.put(Color.magenta, m3);
+        maisons.put(Color.orange, m4);
+        maisons.put(Color.red, m5);
+        maisons.put(Color.yellow, m6);
+        maisons.put(Color.green, m7);
+        maisons.put(Color.blue, m8);
         
         return maisons;
     }
     
-    public HashMap<Couleur, Hotel> InitialiserHashMapHotel(){
-        Hotel m1 = new Hotel(Couleur.MAUVE, 50);
-        Hotel m2 = new Hotel(Couleur.BLEUCIEL, 50);
-        Hotel m3 = new Hotel(Couleur.VIOLET, 100);
-        Hotel m4 = new Hotel(Couleur.ORANGE, 100);
-        Hotel m5 = new Hotel(Couleur.ROUGE, 150);
-        Hotel m6 = new Hotel(Couleur.JAUNE, 150);
-        Hotel m7 = new Hotel(Couleur.VERT, 200);
-        Hotel m8 = new Hotel(Couleur.BLEUFONCE, 200);
+    public HashMap<Color, Hotel> InitialiserHashMapHotel(){
+        Hotel m1 = new Hotel(Color.pink, 50);
+        Hotel m2 = new Hotel(Color.cyan, 50);
+        Hotel m3 = new Hotel(Color.magenta, 100);
+        Hotel m4 = new Hotel(Color.orange, 100);
+        Hotel m5 = new Hotel(Color.red, 150);
+        Hotel m6 = new Hotel(Color.yellow, 150);
+        Hotel m7 = new Hotel(Color.green, 200);
+        Hotel m8 = new Hotel(Color.blue, 200);
         
-        HashMap<Couleur, Hotel> hotels = new HashMap();
+        HashMap<Color, Hotel> hotels = new HashMap();
         
-        hotels.put(Couleur.MAUVE, m1);
-        hotels.put(Couleur.BLEUCIEL, m2);
-        hotels.put(Couleur.VIOLET, m3);
-        hotels.put(Couleur.ORANGE, m4);
-        hotels.put(Couleur.ROUGE, m5);
-        hotels.put(Couleur.JAUNE, m6);
-        hotels.put(Couleur.VERT, m7);
-        hotels.put(Couleur.BLEUFONCE, m8);
+        hotels.put(Color.pink, m1);
+        hotels.put(Color.cyan, m2);
+        hotels.put(Color.magenta, m3);
+        hotels.put(Color.orange, m4);
+        hotels.put(Color.red, m5);
+        hotels.put(Color.yellow, m6);
+        hotels.put(Color.green, m7);
+        hotels.put(Color.blue, m8);
         
         return hotels;
     }
@@ -446,7 +454,7 @@ public class Controler implements Observateur {
     
     public void construire(Joueur j, Propriete p){
         Carreau carCourant = carreaux.get(p.getNumCarreau());
-        Couleur coul = carCourant.getPropriete().getCouleur(); 
+        Color coul = carCourant.getPropriete().getCouleur(); 
         
         if(p.getMaisons().isEmpty()){   
             Maison maison = maisons.get(coul);
@@ -465,5 +473,7 @@ public class Controler implements Observateur {
     public void traiterMessage(Message m) {
         faireAction(m);
     }   
+    
+    //changement
       
 }

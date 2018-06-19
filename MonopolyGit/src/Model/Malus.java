@@ -1,6 +1,7 @@
 package Model;
 
 import Controler.UtilsMono.*;
+import Enum.TypeCarreau;
 
 public class Malus extends Carreau {
     private int taxe;

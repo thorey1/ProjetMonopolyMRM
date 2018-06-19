@@ -5,9 +5,9 @@ public enum TypeCarreau {
     COMPAGNIE,
     DEPART,
     MALUS,
-    TERRAIN,
     CHANCE,
     COMMUNAUTE,
     PRISON,
-    PARC
+    PARC, 
+    PROPRIETE
 }

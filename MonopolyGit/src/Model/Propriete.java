@@ -5,8 +5,8 @@
  */
 package Model;
 
-import Controler.UtilsMono;
-import Controler.UtilsMono.Couleur;
+import Enum.TypeCarreau;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +17,7 @@ public class Propriete extends Terrain{
     private Hotel hotel;
     private ArrayList<Maison> maisons;
     
-    public Propriete(int numCarreau, String nomCarreau, UtilsMono.TypeCarreau type, int prix, UtilsMono.Couleur couleur) {
+    public Propriete(int numCarreau, String nomCarreau, TypeCarreau type, int prix, Color couleur) {
         super(numCarreau, nomCarreau, type, prix, couleur);
         maisons = new ArrayList();
     }
@@ -36,70 +36,54 @@ public class Propriete extends Terrain{
 
     @Override
     public int getPrixMais() {
-        Couleur coulCar = super.getCouleur();
+        Color coulCar = super.getCouleur();
         int prixMais = 0;
-        if(null != coulCar)switch (coulCar) {
-            case MAUVE:
+        if(null != coulCar){
+            if(coulCar==Color.pink){
                 prixMais = 50;
-                break;
-            case BLEUCIEL:
+            } else if(coulCar==Color.cyan){
                 prixMais = 50;
-                break;
-            case VIOLET:
+            } else if(coulCar==Color.magenta){
                 prixMais = 100;
-                break;
-            case ORANGE:
-                prixMais = 100;
-                break;
-            case ROUGE:
-                prixMais = 150;
-                break;
-            case JAUNE:    
-                prixMais = 150;
-                break;
-            case VERT:
+            } else if(coulCar==Color.orange){
+                prixMais = 100;   
+            } else if(coulCar==Color.red){
+                prixMais = 150;    
+            } else if(coulCar==Color.yellow){
+                prixMais = 150;    
+            } else if(coulCar==Color.green){
                 prixMais = 200;
-                break;
-            case BLEUFONCE:
-                prixMais = 200;
-                break;
-            default:
-                break;
+            } else if(coulCar==Color.blue){
+                prixMais = 200;    
+            }
+            
         }
         return prixMais;
     }
 
     @Override
     public int getPrixHotel() {
-        Couleur coulCar = super.getCouleur();
+        Color coulCar = super.getCouleur();
         int prixHotel = 0;
-        if(null != coulCar)switch (coulCar) {
-            case MAUVE:
+        if(null != coulCar){
+            if(coulCar==Color.pink){
                 prixHotel = 50;
-                break;
-            case BLEUCIEL:
+            } else if(coulCar==Color.cyan){
                 prixHotel = 50;
-                break;
-            case VIOLET:
+            } else if(coulCar==Color.magenta){
                 prixHotel = 100;
-                break;
-            case ORANGE:
-                prixHotel = 100;
-                break;
-            case ROUGE:
-                prixHotel = 150;
-                break;
-            case JAUNE:    
-                prixHotel = 150;
-                break;
-            case VERT:
+            } else if(coulCar==Color.orange){
+                prixHotel = 100;   
+            } else if(coulCar==Color.red){
+                prixHotel = 150;    
+            } else if(coulCar==Color.yellow){
+                prixHotel = 150;    
+            } else if(coulCar==Color.green){
                 prixHotel = 200;
-                break;
-            case BLEUFONCE:
-                prixHotel = 200;
-                break;
-            default:
-                break;
+            } else if(coulCar==Color.blue){
+                prixHotel = 200;    
+            }
+            
         }
         return prixHotel;
     }

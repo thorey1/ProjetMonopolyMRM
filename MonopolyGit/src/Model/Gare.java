@@ -5,7 +5,10 @@
  */
 package Model;
 
-import Controler.UtilsMono;
+import Enum.TypeCarreau;
+import java.awt.Color;
+
+
 
 /**
  *
@@ -14,7 +17,7 @@ import Controler.UtilsMono;
 public class Gare extends Terrain{
     
     private int loyer;
-    public Gare(int numCarreau, String nomCarreau, UtilsMono.TypeCarreau type, int prix, UtilsMono.Couleur couleur) {
+    public Gare(int numCarreau, String nomCarreau, TypeCarreau type, int prix, Color couleur) {
         super(numCarreau, nomCarreau, type, prix, couleur);       
     }
     

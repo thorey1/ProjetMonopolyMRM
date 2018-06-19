@@ -7,14 +7,10 @@ package Enum;
 
 /**
  *
- * @author hassanyo
+ * @author thorey
  */
-public enum TypesMessages {
-    JOUER,
-    TIRER_CARTE,
-    ACHETER,
-    AUTRE,
-    FIN_TOUR,
-    DEMARRER_PARTIE,
-    ARRETER
+public enum TypeCarte {
+    ACTION,
+    DEPLACEMENT,
+    ARGENT    
 }

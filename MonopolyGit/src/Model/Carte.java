@@ -1,37 +1,35 @@
 package Model;
 
 
+import Controler.Message;
 import Controler.UtilsMono.*;
-import static Controler.UtilsMono.TypeCarreau.*;
+import Enum.TypeCarreau;
+import Enum.TypeCarte;
+
+import Enum.TypesMessages;
 
 
 public class Carte {
-	private int numCarte, prix;
-        private String description;
-	private TypeCarreau type;
-        
-        Carte(int numCarte, TypeCarreau type, String description, int prix){
-            this.numCarte=numCarte;
-            this.type=type;
-            this.description=description;
-            this.prix=prix;
-        }
-        
-        public TypeCarreau getTypeCarte(){
-            if(getType()==CHANCE||getType()==COMMUNAUTE){
-                return getType();
-            }
-            return null;
-        }
+    private int numCarte;
+    private String description;
+    private TypeCarte type;
+    private TypeCarreau car;
+
+    Carte(int numCarte, TypeCarte type, TypeCarreau car, String description){
+        this.numCarte=numCarte;
+        this.type=type;
+        this.description=description;
+        this.car=car;
+
+    }
 
 
     public int getNumCarte() {
         return numCarte;
     }
 
-
-    public int getPrix() {
-        return prix;
+    public TypeCarreau getCar() {
+        return car;
     }
 
 
@@ -40,7 +38,8 @@ public class Carte {
     }
 
     
-    public TypeCarreau getType() {
+    public TypeCarte getType() {
         return type;
     }
+    
 }

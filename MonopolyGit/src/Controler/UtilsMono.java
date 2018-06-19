@@ -14,32 +14,6 @@ import javax.swing.JOptionPane;
 
 public class UtilsMono {
     
-    public static enum TypeCarreau {
-        GARE,
-        COMPAGNIE,
-        MALUS,
-        TERRAIN,
-        CHANCE,
-        COMMUNAUTE,
-        DEPART,
-        PRISON,
-        PARC
-    }
-    
-    public static enum Couleur {
-        BLEUFONCE,
-        ORANGE,
-        MAUVE,
-        VIOLET,
-        BLEUCIEL,
-        JAUNE,
-        VERT,
-        ROUGE,
-        GRIS
-    }
-    
-    
- 
 
     public static enum Pion {
         ROUGE("Rouge", new Color(255, 0, 0)),

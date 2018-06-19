@@ -5,7 +5,9 @@
  */
 package Model;
 
-import Controler.UtilsMono.Couleur;
+import java.awt.Color;
+
+
 
 /**
  *
@@ -14,9 +16,9 @@ import Controler.UtilsMono.Couleur;
 public class Maison {
     private int prix;
     private Propriete propriete;
-    private Couleur couleur;
+    private Color couleur;
     
-    public Maison(Couleur couleur, int prix){
+    public Maison(Color couleur, int prix){
         this.couleur = couleur;
         this.prix = prix;
     }
@@ -25,7 +27,7 @@ public class Maison {
         return prix;
     }
 
-    public Couleur getCouleur() {
+    public Color getCouleur() {
         return couleur;
     }  
 
