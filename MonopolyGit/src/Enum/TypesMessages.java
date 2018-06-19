@@ -13,5 +13,7 @@ public enum TypesMessages {
     JOUER,
     ACHETER,
     AUTRE,
-    FIN_TOUR        
+    FIN_TOUR,
+    DEMARRER_PARTIE,
+    ARRETER
 }
