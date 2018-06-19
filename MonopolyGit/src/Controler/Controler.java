@@ -130,11 +130,11 @@ public class Controler implements Observateur {
                 ddouble = false;
                 System.out.println("Presser entrée pour lancer le premier dé"+ "\n");
                 this.pause();
-                int d1 = 2;//this.lancerDe();
+                int d1 = this.lancerDe();
                 System.out.println("Voici le premier dé : " + d1 + "\n");
                 System.out.println("Presser entrée pour lancer le deuxième dé" + "\n");
                 this.pause();
-                int d2 = 1;//this.lancerDe();
+                int d2 = this.lancerDe();
                 System.out.println("Voici le deuxième dé : " + d2 + "\n");
                 
                 
