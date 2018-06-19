@@ -484,5 +484,7 @@ public class Controler implements Observateur {
     public void traiterMessage(Message m) {
         faireAction(m);
     }   
+    
+    //changement
       
 }
