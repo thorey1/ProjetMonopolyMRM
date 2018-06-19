@@ -2,11 +2,11 @@ package Model;
 
 import Controler.UtilsMono.*;
 
-public class Terrain extends Carreau {
+public abstract class Terrain extends Carreau {
     private int prix;
     private Couleur couleur;
     private Joueur proprietaire ;
-    private int loyer = 10; //standard pour l'instant
+    private int loyer = 10; //standard pour l'instant;
 
     public Terrain(int numCarreau, String nomCarreau, TypeCarreau type,int prix, Couleur couleur) {
         super(numCarreau, nomCarreau, type);
@@ -42,6 +42,13 @@ public class Terrain extends Carreau {
         return loyer;
     }
 
-  
+    @Override
+    public abstract int getPrixMais();
+
+    @Override
+    public abstract int getPrixHotel();
+
+    @Override
+    public abstract Propriete getPropriete();
         
 }
