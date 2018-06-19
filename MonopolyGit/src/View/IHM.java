@@ -34,6 +34,7 @@ import javax.swing.border.Border;
 public class IHM implements Observe{
     JFrame fenetre,fenetremenu,fenetreregles;
     private Observateur o;
+    JComboBox listeJoueurs;
     
     
     IHM(){
@@ -42,7 +43,7 @@ public class IHM implements Observe{
         fenetre.setSize(1920, 1080);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JLabel nom = new JLabel("Nom joueur :");
+        JLabel nom = new JLabel("Nom du joueur :");
         JLabel argent = new JLabel("Argent joueur :");
         JButton lancer = new JButton("Lancer les dès");
         JPanel des1=new JPanel();
@@ -599,7 +600,7 @@ public class IHM implements Observe{
         panelCentre.setLayout(new GridLayout(4,4));
         JLabel nbjoueurs = new JLabel("Joueurs : ");
         nbjoueurs.setHorizontalAlignment(JLabel.CENTER);
-        JComboBox listeJoueurs = new JComboBox();
+        listeJoueurs = new JComboBox();
         for (int i = 1; i<6;i++){
             listeJoueurs.addItem(i+1);
         }
