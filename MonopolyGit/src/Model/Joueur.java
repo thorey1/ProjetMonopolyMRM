@@ -1,7 +1,7 @@
 package Model;
 
 import Controler.UtilsMono.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Joueur {
 	private int numJoueur;
@@ -9,7 +9,7 @@ public class Joueur {
 	private int solde;
 	private boolean prisonnier;
 	private Carreau position;
-	private ArrayList<Terrain> proprietes;
+	private HashMap<Terrain> proprietes;
         private boolean tour;
 
         public Joueur(int numJoueur, String nomJoueur, Carreau position) {
@@ -18,7 +18,7 @@ public class Joueur {
             this.solde = 5000;
             this.prisonnier = false;
             setPosition(position);
-            proprietes = new ArrayList();
+            proprietes = new HashMap();
         }
        
         
@@ -114,23 +114,12 @@ public class Joueur {
             return nb;
         }
         
-        public void payerLoyer(int loyer){
-            setSolde(solde-loyer); 
+        public void payer(int prix){
+            setSolde(solde-prix); 
         }
         
-        public void gainLoyer(int loyer){
-            setSolde(solde+loyer);
+        public void gain(int prix){
+            setSolde(solde+prix);
         }
         
-        public void payerGare(int prixGare){
-            setSolde(solde-prixGare);
-        }
-        
-        public void payerCompagnie(int prixCompagnie){
-            setSolde(solde-prixCompagnie);
-        }
-        
-        public void payerPropriete(int prixPropriete){
-            setSolde(solde-prixPropriete);
-        } 
 }

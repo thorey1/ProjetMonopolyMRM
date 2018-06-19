@@ -98,7 +98,7 @@ public class Controler implements Observateur {
                                 rep = scanner.nextLine();
                                 if("o".equals(rep)){
                                     int prixProp = newCar.getPrix();
-                                    j.payerPropriete(prixProp);
+                                    j.payer(prixProp);
                                     newCar.setProprietaire(j);
                                     System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
                                     System.out.println("Il te reste " + j.getSolde());
@@ -106,8 +106,8 @@ public class Controler implements Observateur {
                                 }
                             }else if(proprio!=null && proprio != j){
                                 System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
-                                j.payerLoyer(newCar.getLoyer());
-                                proprio.gainLoyer(newCar.getLoyer());
+                                j.payer(newCar.getLoyer());
+                                proprio.gain(newCar.getLoyer());
                                 System.out.println(j.getNomJoueur() + " perd " + newCar.getLoyer()+ ", Il te reste " + j.getSolde());
                                 System.out.println(proprio.getNomJoueur() + " gagne " + newCar.getLoyer() + "\n"); 
                             }else{
@@ -119,7 +119,7 @@ public class Controler implements Observateur {
                         System.out.println("Tu n'as pas fais de double \n Fin du tour \n");
                     }
                 }else if("payer".equals(rep)){
-                    j.payerLoyer(50);
+                    j.payer(50);
                     j.setPrison(false);
                     System.out.println("Tu as payé 50€!");
                     ddouble=true;
@@ -159,7 +159,7 @@ public class Controler implements Observateur {
                     newCar = carreaux.get(newPos%carreaux.size());
                     j.setPosition(newCar);
                     System.out.println("Passage par la case départ, tu gagnes 200€!! \n \t Bilan solde : " + j.getSolde() +"\n");
-                    j.gainLoyer(200);
+                    j.gain(200);
                 }else{
                     newCar = carreaux.get(newPos);
                     j.setPosition(newCar);
@@ -187,21 +187,22 @@ public class Controler implements Observateur {
                         String rep = scanner.nextLine();
                         if("o".equals(rep)){
                             int prixProp = newCar.getPrix();
-                            j.payerPropriete(prixProp);
+                            j.payer(prixProp);
                             newCar.setProprietaire(j);
                             System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
                             System.out.println("Il te reste " + j.getSolde());
                             //
+                            
                             System.out.println("Veux tu construire un hotel ?(o/n)");
                                     rep = scanner.nextLine();
                                     if("o".equals(rep)){
-                                        this.construireHotel(j, newCar.getPropriete());
+                                        this.construire(j, newCar.getPropriete());
                                     }
                         }
                     }else if(proprio!=null && proprio != j){
                         System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
-                        j.payerLoyer(newCar.getLoyer());
-                        proprio.gainLoyer(newCar.getLoyer());
+                        j.payer(newCar.getLoyer());
+                        proprio.gain(newCar.getLoyer());
                         System.out.println(j.getNomJoueur() + " perd " + newCar.getLoyer()+ ", Il te reste " + j.getSolde());
                         System.out.println(proprio.getNomJoueur() + " gagne " + newCar.getLoyer() + "\n"); 
                     }else{
@@ -443,32 +444,20 @@ public class Controler implements Observateur {
         }
     }
     
-    public void construireMaison(Joueur j, Propriete p){
-        if(p.getMaisons().size() <= 4){
-            Carreau carCourant = carreaux.get(p.getNumCarreau());
-            int prixMais = carCourant.getPrixMais();
-            Couleur coul = carCourant.getPropriete().getCouleur(); 
+    public void construire(Joueur j, Propriete p){
+        Carreau carCourant = carreaux.get(p.getNumCarreau());
+        Couleur coul = carCourant.getPropriete().getCouleur(); 
+        
+        if(p.getMaisons().isEmpty()){   
             Maison maison = maisons.get(coul);
+            j.payer(maison.getPrix());
             carCourant.getPropriete().addMaison(maison);
-            j.payerPropriete(maison.getPrix());
-            //Pour le test
-            System.out.printf("Tu paies %d la maison\n", maison.getPrix());
-            System.out.println("Il te reste " + j.getSolde());
-        }    
-    }
-    
-    public void construireHotel(Joueur j, Propriete p){
-        if(p.getMaisons().size() == 4){
+            
+        } else if(p.getMaisons().size() == 4){
             p.getMaisons().clear();
-            Carreau carCourant = carreaux.get(p.getNumCarreau());
-            int prixHotel = carCourant.getPrixHotel();
-            Couleur coul = carCourant.getPropriete().getCouleur(); 
             Hotel hotel = hotels.get(coul);
             carCourant.getPropriete().setHotel(hotel);
-            j.payerPropriete(hotel.getPrix());
-            //Pour le test
-            System.out.printf("Tu paies %d l'hotel\n", hotel.getPrix());
-            System.out.println("Il te reste " + j.getSolde());
+            j.payer(hotel.getPrix());
         }    
     }
 
