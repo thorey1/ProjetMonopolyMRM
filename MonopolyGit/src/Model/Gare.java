@@ -24,4 +24,22 @@ public class Gare extends Terrain{
     public int getloyer(){
         return loyer;
     } 
+
+    
+    
+    //overrides inutilisés mais requis
+    @Override
+    public int getPrixMais() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getPrixHotel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Propriete getPropriete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

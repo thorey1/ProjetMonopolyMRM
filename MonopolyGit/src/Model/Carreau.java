@@ -34,6 +34,8 @@ public abstract class Carreau {
         joueurs.add(j);
     }
     
+    public abstract Propriete getPropriete();
+    
     public abstract int getPrix();
 
     public abstract void setProprietaire(Joueur proprietaire);
@@ -41,5 +43,9 @@ public abstract class Carreau {
     public abstract Joueur getProprietaire();
 
     public abstract int getLoyer();
+    
+    public abstract int getPrixMais();
+    
+    public abstract int getPrixHotel();
         
 }

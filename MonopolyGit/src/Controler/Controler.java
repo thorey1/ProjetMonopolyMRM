@@ -18,6 +18,8 @@ public class Controler implements Observateur {
     public VueJoueurEtudiant vueJoueur;
     private HashMap<Integer, Carte> cartes;
     private HashMap<Integer, Carreau> carreaux;
+    private HashMap<Color, Maison> maisons;
+    private HashMap<Color, Hotel> hotels;
 
     public Controler(HashMap<Integer, Joueur> joueurs, VuePlateau vuePlateau, VueJoueurEtudiant vueJoueur, HashMap<Integer, Carte> cartes, HashMap<Integer, Carreau> carreaux) {
         this.vuePlateau = vuePlateau;
@@ -29,6 +31,7 @@ public class Controler implements Observateur {
         for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
             carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
         }
+        
     }     
     
     
@@ -37,6 +40,10 @@ public class Controler implements Observateur {
         cartes = new HashMap();
         carreaux = new HashMap();
         joueurs = new HashMap();
+        maisons = new HashMap();
+        maisons = InitialiserHashMapMaison();
+        hotels = new HashMap();
+        hotels = InitialiserHashMapHotel();
         
         for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
             carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
@@ -53,8 +60,7 @@ public class Controler implements Observateur {
 
     public HashMap<Integer, Carreau> getCarreaux() {
         return carreaux;
-    }
-        
+    }    
 
     public void deplacement(Joueur j) {
             boolean ddouble = true;
@@ -98,6 +104,7 @@ public class Controler implements Observateur {
                                     newCar.setProprietaire(j);
                                     System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
                                     System.out.println("Il te reste " + j.getSolde());
+                                    
                                 }
                             }else if(proprio!=null && proprio != j){
                                 System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
@@ -125,11 +132,11 @@ public class Controler implements Observateur {
                 ddouble = false;
                 System.out.println("Presser entrée pour lancer le premier dé"+ "\n");
                 this.pause();
-                int d1 = 2;//this.lancerDe();
+                int d1 = this.lancerDe();
                 System.out.println("Voici le premier dé : " + d1 + "\n");
                 System.out.println("Presser entrée pour lancer le deuxième dé" + "\n");
                 this.pause();
-                int d2 = 1;//this.lancerDe();
+                int d2 = this.lancerDe();
                 System.out.println("Voici le deuxième dé : " + d2 + "\n");
                 
                 
@@ -186,6 +193,12 @@ public class Controler implements Observateur {
                             newCar.setProprietaire(j);
                             System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
                             System.out.println("Il te reste " + j.getSolde());
+                            //
+                            System.out.println("Veux tu construire un hotel ?(o/n)");
+                                    rep = scanner.nextLine();
+                                    if("o".equals(rep)){
+                                        this.construireHotel(j, newCar.getPropriete());
+                                    }
                         }
                     }else if(proprio!=null && proprio != j){
                         System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
@@ -276,45 +289,45 @@ public class Controler implements Observateur {
     
     public ArrayList<Carreau> initialiserHashMapCarreaux(){
         Special t1 = new Special(1,"Départ",DEPART);
-        Terrain t2 = new Terrain(2,"Boulevard de Belleville",PROPRIETE,60,Color.pink);
+        Terrain t2 = new Propriete(2,"Boulevard de Belleville",PROPRIETE,60,Color.pink);
         Special t3 = new Special(3,"Caisse de communauté",COMMUNAUTE);
-        Terrain t4 = new Terrain(4,"Rue Lecourbe",PROPRIETE,60,Color.pink);
+        Terrain t4 = new Propriete(4,"Rue Lecourbe",PROPRIETE,60,Color.pink);
         Malus t5 = new Malus(5, "Impôts sur le revenu", MALUS, 200);
-        Terrain t6 = new Terrain(6, "Gare Montparnasse", GARE, 200,null);
-        Terrain t7 = new Terrain(7,"Rue de Vaugirard",PROPRIETE,100,Color.cyan);
+        Terrain t6 = new Propriete(6, "Gare Montparnasse", GARE, 200,null);
+        Terrain t7 = new Propriete(7,"Rue de Vaugirard",PROPRIETE,100,Color.cyan);
         Special t8 = new Special(8,"Chance",CHANCE);
-        Terrain t9 = new Terrain(9,"Rue de Courcelles",PROPRIETE,100,Color.cyan);
-        Terrain t10 = new Terrain(10,"Avenue de la République",PROPRIETE,120,Color.cyan);
+        Terrain t9 = new Propriete(9,"Rue de Courcelles",PROPRIETE,100,Color.cyan);
+        Terrain t10 = new Propriete(10,"Avenue de la République",PROPRIETE,120,Color.cyan);
         Special t11 = new Special(11,"En prison/Simple visite", PARC);
-        Terrain t12 = new Terrain(12,"Boulevard de la Villette",PROPRIETE,140,Color.magenta);
-        Terrain t13 = new Terrain(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,Color.gray);
-        Terrain t14 = new Terrain(14,"Avenue de Neuilly",PROPRIETE,140,Color.magenta);
-        Terrain t15 = new Terrain(15,"Rue de Paradis",PROPRIETE,160,Color.magenta);
-        Terrain t16 = new Terrain(16, "Gare de Lyon", GARE, 200,null);
-        Terrain t17 = new Terrain(17,"Avenue Mozart",PROPRIETE,180,Color.orange);
+        Terrain t12 = new Propriete(12,"Boulevard de la Villette",PROPRIETE,140,Color.magenta);
+        Terrain t13 = new Propriete(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,Color.gray);
+        Terrain t14 = new Propriete(14,"Avenue de Neuilly",PROPRIETE,140,Color.magenta);
+        Terrain t15 = new Propriete(15,"Rue de Paradis",PROPRIETE,160,Color.magenta);
+        Terrain t16 = new Propriete(16, "Gare de Lyon", GARE, 200,null);
+        Terrain t17 = new Propriete(17,"Avenue Mozart",PROPRIETE,180,Color.orange);
         Special t18 = new Special(18,"Caisse de communauté",COMMUNAUTE);
-        Terrain t19 = new Terrain(19,"Boulevard Saint-Michel",PROPRIETE,180,Color.orange);
-        Terrain t20 = new Terrain(20,"Place Pigalle",PROPRIETE,200,Color.orange);
+        Terrain t19 = new Propriete(19,"Boulevard Saint-Michel",PROPRIETE,180,Color.orange);
+        Terrain t20 = new Propriete(20,"Place Pigalle",PROPRIETE,200,Color.orange);
         Special t21 = new Special(21,"Parc Gratuit",PARC);
-        Terrain t22 = new Terrain(22,"Avenue Matignon",PROPRIETE,220,Color.red);
+        Terrain t22 = new Propriete(22,"Avenue Matignon",PROPRIETE,220,Color.red);
         Special t23 = new Special(23,"Chance",CHANCE);
-        Terrain t24 = new Terrain(24,"Boulevard Malesherbes",PROPRIETE,220,Color.red);
-        Terrain t25 = new Terrain(25,"Avenue Henri-Martin",PROPRIETE,240,Color.red);
-        Terrain t26 = new Terrain(26, "Gare du Nord", GARE, 200,null);
-        Terrain t27 = new Terrain(27,"Faubourg Saint-Honoré",PROPRIETE,260,Color.yellow);
-        Terrain t28 = new Terrain(28,"Place de la Bourse",PROPRIETE,260,Color.yellow);
-        Terrain t29 = new Terrain(29, "Compagnie de distribution des eaux",COMPAGNIE,150,Color.gray);
-        Terrain t30 = new Terrain(30,"Rue de la Fayette",PROPRIETE,280,Color.yellow); 
+        Terrain t24 = new Propriete(24,"Boulevard Malesherbes",PROPRIETE,220,Color.red);
+        Terrain t25 = new Propriete(25,"Avenue Henri-Martin",PROPRIETE,240,Color.red);
+        Terrain t26 = new Propriete(26, "Gare du Nord", GARE, 200,null);
+        Terrain t27 = new Propriete(27,"Faubourg Saint-Honoré",PROPRIETE,260,Color.yellow);
+        Terrain t28 = new Propriete(28,"Place de la Bourse",PROPRIETE,260,Color.yellow);
+        Terrain t29 = new Propriete(29, "Compagnie de distribution des eaux",COMPAGNIE,150,Color.gray);
+        Terrain t30 = new Propriete(30,"Rue de la Fayette",PROPRIETE,280,Color.yellow); 
         Special t31 = new Special(31,"Allez en Prison",PRISON);
-        Terrain t32 = new Terrain(32,"Avenue de Breteuil",PROPRIETE,300,Color.green);    
-        Terrain t33 = new Terrain(33,"Avenue Foch",PROPRIETE,300,Color.green);    
+        Terrain t32 = new Propriete(32,"Avenue de Breteuil",PROPRIETE,300,Color.green);    
+        Terrain t33 = new Propriete(33,"Avenue Foch",PROPRIETE,300,Color.green);    
         Special t34 = new Special(34,"Caisse de communauté",COMMUNAUTE);
-        Terrain t35 = new Terrain(35,"Boulevard des Capucines",PROPRIETE,320,Color.green);   
-        Terrain t36 = new Terrain(36, "Gare Saint-Lazare", GARE, 200,null);
+        Terrain t35 = new Propriete(35,"Boulevard des Capucines",PROPRIETE,320,Color.green);   
+        Terrain t36 = new Propriete(36, "Gare Saint-Lazare", GARE, 200,null);
         Special t37 = new Special(37,"Chance",CHANCE);
-        Terrain t38 = new Terrain(38,"Avenue des Champs-Elysées",PROPRIETE,350,Color.blue); 
+        Terrain t38 = new Propriete(38,"Avenue des Champs-Elysées",PROPRIETE,350,Color.blue); 
         Malus t39 = new Malus(39, "Taxe de Luxe", MALUS, 200);
-        Terrain t40 = new Terrain(40,"Rue de la Paix",PROPRIETE,400,Color.blue);    
+        Terrain t40 = new Propriete(40,"Rue de la Paix",PROPRIETE,400,Color.blue);    
         ArrayList<Carreau> casecar = new ArrayList();
         casecar.add(t1);
         casecar.add(t2);
@@ -359,88 +372,53 @@ public class Controler implements Observateur {
         return casecar;
     }
     
-    public ArrayList<Carte> initialiserHashMapCarte(){
-        //Carte chance
-        Action c1 = new Action(1,ACTION,CHANCE,"Vous êtes libéré de prison. Cette carte peut être conservée jusqu'à ce qu'elle soit utilisée.");
+    public HashMap<Color, Maison> InitialiserHashMapMaison(){
+        Maison m1 = new Maison(Color.pink, 50);
+        Maison m2 = new Maison(Color.cyan, 50);
+        Maison m3 = new Maison(Color.magenta, 100);
+        Maison m4 = new Maison(Color.orange, 100);
+        Maison m5 = new Maison(Color.red, 150);
+        Maison m6 = new Maison(Color.yellow, 150);
+        Maison m7 = new Maison(Color.green, 200);
+        Maison m8 = new Maison(Color.blue, 200);
         
-        Argent c3 = new Argent(3,ARGENT,CHANCE,"Vous êtes imposés pour les réparations de voirie à raison de : 40 € par maison et 115€ par hôtel.");
-        Argent c4 = new Argent(4, ARGENT,CHANCE, "Amende pour excès de vitesse : 15€");
-        Argent c5 = new Argent(5, ARGENT,CHANCE, "Faites des réparations dans toutes vos maisons : versez pour chaque maison 25€ et pour chaque hôtel 100€");
-        Argent c6 = new Argent(6, ARGENT,CHANCE, "Amende pour ivresse : 20€");
-        Argent c11 = new Argent(11, ARGENT,CHANCE,"Payez pour frais de scolarité : 150€");
-        Argent c12 = new Argent(12, ARGENT,CHANCE, "Vous avez gagné le prix de mots croisés. Recevez 100€");
-        Argent c13 = new Argent(13, ARGENT,CHANCE, "La Banque vous verse un dividende de 50€");
-        Argent c15 = new Argent(15, ARGENT,CHANCE, "Votre immeuble et votre prêt rapportent. Vous devez toucher 150€");
+        HashMap<Color, Maison> maisons = new HashMap();
         
-        Deplacement c2 = new Deplacement(2, DEPLACEMENT,CHANCE, "Reculez de trois cases");
-        Deplacement c7 = new Deplacement(7, DEPLACEMENT,CHANCE, "Avancez jusqu'à la case Départ");
-        Deplacement c8 = new Deplacement(8, DEPLACEMENT,CHANCE, "Allez en prison. Avancez tout droit en prison. Ne passez pas par la case Départ. Ne recevez pas 200€");
-        Deplacement c9 = new Deplacement(9, DEPLACEMENT,CHANCE, "Rendez-vous à l'Avenue Henri Martin. Si vous passez par la case Départ, recevez 200");
-        Deplacement c10 = new Deplacement(10, DEPLACEMENT,CHANCE, "Allez à la gare de Lyon. Si vous passez par la case Départ, recevez 200€.");
-        Deplacement c14 = new Deplacement(14, DEPLACEMENT,CHANCE, "Rendez-vous à la Rue de la Paix");
-        Deplacement c16 = new Deplacement(16, DEPLACEMENT,CHANCE, "Accédez au Boulevard de la Villette. Si vous passez par la case Départ, recevez 200€");
+        maisons.put(Color.pink, m1);
+        maisons.put(Color.cyan, m2);
+        maisons.put(Color.magenta, m3);
+        maisons.put(Color.orange, m4);
+        maisons.put(Color.red, m5);
+        maisons.put(Color.yellow, m6);
+        maisons.put(Color.green, m7);
+        maisons.put(Color.blue, m8);
         
-        //carte communauté
-        Action c17 = new Action(17,ACTION,COMMUNAUTE,"Vous êtes libéré de prison. Cette carte peut être conservée jusqu'à ce qu'elle soit utilisée.");
+        return maisons;
+    }
+    
+    public HashMap<Color, Hotel> InitialiserHashMapHotel(){
+        Hotel m1 = new Hotel(Color.pink, 50);
+        Hotel m2 = new Hotel(Color.cyan, 50);
+        Hotel m3 = new Hotel(Color.magenta, 100);
+        Hotel m4 = new Hotel(Color.orange, 100);
+        Hotel m5 = new Hotel(Color.red, 150);
+        Hotel m6 = new Hotel(Color.yellow, 150);
+        Hotel m7 = new Hotel(Color.green, 200);
+        Hotel m8 = new Hotel(Color.blue, 200);
         
-        Argent c18 = new Argent(18,ARGENT,COMMUNAUTE,"Payez une amende de 10€");        
-        Argent c19 = new Argent(19,ARGENT,COMMUNAUTE,"C'est votre anniversaire. Chaque joueur doit vous donner 10€");
-        Argent c20 = new Argent(20,ARGENT,COMMUNAUTE,"Erreur de la banque en votre faveur. Recevez 200€");        
-        Argent c22 = new Argent(22,ARGENT,COMMUNAUTE,"Payez la note du médecin : 50€");
-        Argent c23 = new Argent(23,ARGENT,COMMUNAUTE,"Les contributions vous remboursent la somme de 20€");
-        Argent c24 = new Argent(24,ARGENT,COMMUNAUTE,"Payez à l'hôpital 100€");        
-        Argent c25 = new Argent(25,ARGENT,COMMUNAUTE,"Vous héritez : 100€");
-        Argent c27 = new Argent(27,ARGENT,COMMUNAUTE,"Payez votre Police d'Assurance : 50€");
-        Argent c28 = new Argent(28,ARGENT,COMMUNAUTE,"La vente de votre stock vous rapporte : 50€");
-        Argent c30 = new Argent(30,ARGENT,COMMUNAUTE,"Recevez votre intérêt sur l'emprunt à 7% : 25€");
-        Argent c31 = new Argent(31,ARGENT,COMMUNAUTE,"Recevez votre revenu annuel : 100€");
-        Argent c32 = new Argent(32,ARGENT,COMMUNAUTE,"Vous avez gagné le deuxième prix de beauté : recevez 10€");
+        HashMap<Color, Hotel> hotels = new HashMap();
         
-        Deplacement c21 = new Deplacement(21,DEPLACEMENT,COMMUNAUTE,"Retournez à Belleville");
-        Deplacement c26 = new Deplacement(24,DEPLACEMENT,COMMUNAUTE,"Allez en prison. Avancez tout droit en prison. Ne passez pas par la case Départ. Ne recevez pas 200€");
-        Deplacement c29 = new Deplacement(27,DEPLACEMENT,COMMUNAUTE,"Avancez jusqu'à la case Départ");
+        hotels.put(Color.pink, m1);
+        hotels.put(Color.cyan, m2);
+        hotels.put(Color.magenta, m3);
+        hotels.put(Color.orange, m4);
+        hotels.put(Color.red, m5);
+        hotels.put(Color.yellow, m6);
+        hotels.put(Color.green, m7);
+        hotels.put(Color.blue, m8);
         
-        
-        ArrayList<Carte> cartesComplet = new ArrayList();
-        cartesComplet.add(c1);
-        cartesComplet.add(c2);
-        cartesComplet.add(c3);
-        cartesComplet.add(c4);
-        cartesComplet.add(c5);
-        cartesComplet.add(c6);
-        cartesComplet.add(c7);
-        cartesComplet.add(c8);
-        cartesComplet.add(c9);
-        cartesComplet.add(c10);
-        cartesComplet.add(c11);
-        cartesComplet.add(c12);
-        cartesComplet.add(c13);
-        cartesComplet.add(c14);
-        cartesComplet.add(c15);
-        cartesComplet.add(c16);
-        cartesComplet.add(c17);
-        cartesComplet.add(c18);
-        cartesComplet.add(c19);
-        cartesComplet.add(c20);
-        cartesComplet.add(c21);
-        cartesComplet.add(c22);
-        cartesComplet.add(c23);
-        cartesComplet.add(c24);
-        cartesComplet.add(c25);
-        cartesComplet.add(c26);
-        cartesComplet.add(c27);
-        cartesComplet.add(c28);
-        cartesComplet.add(c29);
-        cartesComplet.add(c30);
-        cartesComplet.add(c31);
-        cartesComplet.add(c32);
-
-        
-        
-        return cartesComplet;
-        
-        
-    }   
+        return hotels;
+    }
     
     public void pause(){
         System.out.println("Press \"ENTER\" to continue...");
@@ -472,13 +450,39 @@ public class Controler implements Observateur {
             }
         }
     }
+    
+    public void construireMaison(Joueur j, Propriete p){
+        if(p.getMaisons().size() <= 4){
+            Carreau carCourant = carreaux.get(p.getNumCarreau());
+            int prixMais = carCourant.getPrixMais();
+            Color coul = carCourant.getPropriete().getCouleur(); 
+            Maison maison = maisons.get(coul);
+            carCourant.getPropriete().addMaison(maison);
+            j.payerPropriete(maison.getPrix());
+            //Pour le test
+            System.out.printf("Tu paies %d la maison\n", maison.getPrix());
+            System.out.println("Il te reste " + j.getSolde());
+        }    
+    }
+    
+    public void construireHotel(Joueur j, Propriete p){
+        if(p.getMaisons().size() == 4){
+            p.getMaisons().clear();
+            Carreau carCourant = carreaux.get(p.getNumCarreau());
+            int prixHotel = carCourant.getPrixHotel();
+            Color coul = carCourant.getPropriete().getCouleur(); 
+            Hotel hotel = hotels.get(coul);
+            carCourant.getPropriete().setHotel(hotel);
+            j.payerPropriete(hotel.getPrix());
+            //Pour le test
+            System.out.printf("Tu paies %d l'hotel\n", hotel.getPrix());
+            System.out.println("Il te reste " + j.getSolde());
+        }    
+    }
 
     @Override
     public void traiterMessage(Message m) {
-        faireAction(m);        
-    }
-    
-
-    
-  
+        faireAction(m);
+    }   
+      
 }
