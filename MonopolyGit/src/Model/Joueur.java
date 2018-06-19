@@ -10,7 +10,7 @@ public class Joueur {
 	private int solde;
 	private boolean prisonnier;
 	private Carreau position;
-	private HashMap<Terrain> proprietes;
+	private HashMap<Color, Terrain> proprietes;
         private boolean tour;
 
         public Joueur(int numJoueur, String nomJoueur, Carreau position) {
@@ -87,8 +87,8 @@ public class Joueur {
             this.solde = solde;
         }
         
-        public void addPropriétés (Terrain prop){
-            this.proprietes.add(prop);
+        public void addProprietes (Color col, Terrain prop){
+            this.proprietes.put(col, prop);
         }
 
         public boolean getTour() {
@@ -101,16 +101,16 @@ public class Joueur {
             TypeCarreau tc = t.getTypeCarreau();
             
             if(tc == TypeCarreau.GARE || tc == TypeCarreau.COMPAGNIE){              
-                for(Terrain terter : proprietes){             
-                    if(terter.getTypeCarreau() == tc){
+                for(int i = 0; i<=proprietes.size(); i++){             
+                    if(proprietes.get(i).getTypeCarreau() == tc){
                         nb++;
                     }
                 }
             }
             else if(tc == TypeCarreau.PROPRIETE){
                 c = t.getCouleur();
-                for(Terrain terter : proprietes){             
-                    if(terter.getCouleur()== c){
+                for(int i = 0; i<=proprietes.size(); i++){             
+                    if(proprietes.get(i).getCouleur()== c){
                         nb++;
                     }
                 }

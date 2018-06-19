@@ -20,6 +20,7 @@ public class Controler implements Observateur {
     private HashMap<Integer, Carreau> carreaux;
     private HashMap<Color, Maison> maisons;
     private HashMap<Color, Hotel> hotels;
+    private HashMap<Color, Integer> couleurs;
 
     public Controler(HashMap<Integer, Joueur> joueurs, VuePlateau vuePlateau, VueJoueurEtudiant vueJoueur, HashMap<Integer, Carte> cartes, HashMap<Integer, Carreau> carreaux) {
         this.vuePlateau = vuePlateau;
@@ -27,6 +28,7 @@ public class Controler implements Observateur {
         cartes = new HashMap();
         carreaux = new HashMap();
         joueurs = new HashMap();
+        couleurs = new HashMap();
         
         for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
             carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
@@ -61,6 +63,10 @@ public class Controler implements Observateur {
     public HashMap<Integer, Carreau> getCarreaux() {
         return carreaux;
     }    
+
+    public HashMap<Color, Integer> getCouleurs() {
+        return couleurs;
+    }
 
     public void deplacement(Joueur j) {
             boolean ddouble = true;
@@ -191,15 +197,17 @@ public class Controler implements Observateur {
                             int prixProp = newCar.getPrix();
                             j.payer(prixProp);
                             newCar.setProprietaire(j);
+                            
                             System.out.printf("Tu paies %d la propriété %s\n", prixProp, nomProp);
                             System.out.println("Il te reste " + j.getSolde());
                             //
+                            Propriete prop = newCar.getPropriete();
+                            if((j.getNbProp(prop) == getCouleurs().get(prop.getCouleur())) && (getCouleurs().)){
+                                //Construction après vérification que le joueur possède tous les terrains de la couleur de la case qu'il possède
+                                this.construire(j, prop);
+                            }
                             
-                            System.out.println("Veux tu construire un hotel ?(o/n)");
-                                    rep = scanner.nextLine();
-                                    if("o".equals(rep)){
-                                        this.construire(j, newCar.getPropriete());
-                                    }
+                            
                         }
                     }else if(proprio!=null && proprio != j){
                         System.out.println("Tu es sur la propriété " + nomProp + " qui appartient à " + proprio.getNomJoueur() + "\n");
@@ -419,6 +427,21 @@ public class Controler implements Observateur {
         hotels.put(Color.blue, m8);
         
         return hotels;
+    }
+    
+    public HashMap<Color, Integer> InitialiserHashMapCouleur(){
+        HashMap<Color, Integer> couleurs = new HashMap();
+        
+        couleurs.put(Color.pink, 2);
+        couleurs.put(Color.cyan, 3);
+        couleurs.put(Color.magenta, 2);
+        couleurs.put(Color.orange, 3);
+        couleurs.put(Color.red, 3);
+        couleurs.put(Color.yellow, 3);
+        couleurs.put(Color.green, 3);
+        couleurs.put(Color.blue, 2);
+        
+        return couleurs;
     }
     
     public void pause(){
