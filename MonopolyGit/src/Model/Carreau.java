@@ -1,6 +1,7 @@
 package Model;
 
 import Controler.UtilsMono.*;
+import Enum.TypeCarreau;
 import java.util.ArrayList;
 import java.util.Vector;
 

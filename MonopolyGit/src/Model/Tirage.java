@@ -1,7 +1,9 @@
 package Model;
 
 import Controler.UtilsMono.*;
-import static Controler.UtilsMono.TypeCarreau.*;
+import Enum.TypeCarreau;
+import static Enum.TypeCarreau.CHANCE;
+import static Enum.TypeCarreau.COMMUNAUTE;
 
 public class Tirage extends Carreau {
 

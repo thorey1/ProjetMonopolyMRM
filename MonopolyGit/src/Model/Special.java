@@ -1,6 +1,7 @@
 package Model;
 
 import Controler.UtilsMono.*;
+import Enum.TypeCarreau;
 
 public class Special extends Carreau {
 

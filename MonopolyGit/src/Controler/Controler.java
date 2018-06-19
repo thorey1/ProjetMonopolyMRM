@@ -1,9 +1,11 @@
 package Controler;
 
-import Controler.UtilsMono.*;
-import static Controler.UtilsMono.Couleur.*;
-import static Controler.UtilsMono.TypeCarreau.*;
-import Enum.TypesMessages;
+import java.awt.Color;
+
+import Enum.TypeCarreau;
+import static Enum.TypeCarreau.*;
+import static Enum.TypeCarte.*;
+import static Enum.TypesMessages.*;
 import Model.*;
 import View.*;
 import java.util.ArrayList;
@@ -24,8 +26,8 @@ public class Controler implements Observateur {
         carreaux = new HashMap();
         joueurs = new HashMap();
         
-        for (int i=1;i<=this.InitialiserHashMapCarreaux().size();i++){
-            carreaux.put(i, this.InitialiserHashMapCarreaux().get(i-1));
+        for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
+            carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
         }
     }     
     
@@ -36,8 +38,8 @@ public class Controler implements Observateur {
         carreaux = new HashMap();
         joueurs = new HashMap();
         
-        for (int i=1;i<=this.InitialiserHashMapCarreaux().size();i++){
-            carreaux.put(i, this.InitialiserHashMapCarreaux().get(i-1));
+        for (int i=1;i<=this.initialiserHashMapCarreaux().size();i++){
+            carreaux.put(i, this.initialiserHashMapCarreaux().get(i-1));
         }
     }  
 
@@ -230,7 +232,7 @@ public class Controler implements Observateur {
     public ArrayList<Carte> getCartes(TypeCarreau tc) {
         ArrayList pilecarte = new ArrayList();
         for (int i=0;i<cartes.size();i++){
-            if (cartes.get(i).getTypeCarte()==tc){
+            if (cartes.get(i).getCar()==tc){
                 pilecarte.add(cartes.get(i));
             }
         }
@@ -257,56 +259,62 @@ public class Controler implements Observateur {
     
     
     private void faireAction(Message m) {
-        if (m.type==TypesMessages.JOUER){
-         
+        if(m.type==JOUER){
+            
+        }else if(m.type==TIRER_CARTE){
+            //if (m.type==ACTION){
+                
+            //}  
         }
     }
+    
+    //private void faireActionCarte
    
 // public int getNewPosition() {
      //       throw new UnsupportedOperationException();
     //}
     
-    public ArrayList<Carreau> InitialiserHashMapCarreaux(){
+    public ArrayList<Carreau> initialiserHashMapCarreaux(){
         Special t1 = new Special(1,"Départ",DEPART);
-        Terrain t2 = new Terrain(2,"Boulevard de Belleville",TERRAIN,60,MAUVE);
+        Terrain t2 = new Terrain(2,"Boulevard de Belleville",PROPRIETE,60,Color.pink);
         Special t3 = new Special(3,"Caisse de communauté",COMMUNAUTE);
-        Terrain t4 = new Terrain(4,"Rue Lecourbe",TERRAIN,60,MAUVE);
+        Terrain t4 = new Terrain(4,"Rue Lecourbe",PROPRIETE,60,Color.pink);
         Malus t5 = new Malus(5, "Impôts sur le revenu", MALUS, 200);
         Terrain t6 = new Terrain(6, "Gare Montparnasse", GARE, 200,null);
-        Terrain t7 = new Terrain(7,"Rue de Vaugirard",TERRAIN,100,BLEUCIEL);
+        Terrain t7 = new Terrain(7,"Rue de Vaugirard",PROPRIETE,100,Color.cyan);
         Special t8 = new Special(8,"Chance",CHANCE);
-        Terrain t9 = new Terrain(9,"Rue de Courcelles",TERRAIN,100,BLEUCIEL);
-        Terrain t10 = new Terrain(10,"Avenue de la République",TERRAIN,120,BLEUCIEL);
+        Terrain t9 = new Terrain(9,"Rue de Courcelles",PROPRIETE,100,Color.cyan);
+        Terrain t10 = new Terrain(10,"Avenue de la République",PROPRIETE,120,Color.cyan);
         Special t11 = new Special(11,"En prison/Simple visite", PARC);
-        Terrain t12 = new Terrain(12,"Boulevard de la Villette",TERRAIN,140,VIOLET);
-        Terrain t13 = new Terrain(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,GRIS);
-        Terrain t14 = new Terrain(14,"Avenue de Neuilly",TERRAIN,140,VIOLET);
-        Terrain t15 = new Terrain(15,"Rue de Paradis",TERRAIN,160,VIOLET);
+        Terrain t12 = new Terrain(12,"Boulevard de la Villette",PROPRIETE,140,Color.magenta);
+        Terrain t13 = new Terrain(13, "Compagnie de distribution d'électricité",COMPAGNIE,150,Color.gray);
+        Terrain t14 = new Terrain(14,"Avenue de Neuilly",PROPRIETE,140,Color.magenta);
+        Terrain t15 = new Terrain(15,"Rue de Paradis",PROPRIETE,160,Color.magenta);
         Terrain t16 = new Terrain(16, "Gare de Lyon", GARE, 200,null);
-        Terrain t17 = new Terrain(17,"Avenue Mozart",TERRAIN,180,ORANGE);
+        Terrain t17 = new Terrain(17,"Avenue Mozart",PROPRIETE,180,Color.orange);
         Special t18 = new Special(18,"Caisse de communauté",COMMUNAUTE);
-        Terrain t19 = new Terrain(19,"Boulevard Saint-Michel",TERRAIN,180,ORANGE);
-        Terrain t20 = new Terrain(20,"Place Pigalle",TERRAIN,200,ORANGE);
+        Terrain t19 = new Terrain(19,"Boulevard Saint-Michel",PROPRIETE,180,Color.orange);
+        Terrain t20 = new Terrain(20,"Place Pigalle",PROPRIETE,200,Color.orange);
         Special t21 = new Special(21,"Parc Gratuit",PARC);
-        Terrain t22 = new Terrain(22,"Avenue Matignon",TERRAIN,220,ROUGE);
+        Terrain t22 = new Terrain(22,"Avenue Matignon",PROPRIETE,220,Color.red);
         Special t23 = new Special(23,"Chance",CHANCE);
-        Terrain t24 = new Terrain(24,"Boulevard Malesherbes",TERRAIN,220,ROUGE);
-        Terrain t25 = new Terrain(25,"Avenue Henri-Martin",TERRAIN,240,ROUGE);
+        Terrain t24 = new Terrain(24,"Boulevard Malesherbes",PROPRIETE,220,Color.red);
+        Terrain t25 = new Terrain(25,"Avenue Henri-Martin",PROPRIETE,240,Color.red);
         Terrain t26 = new Terrain(26, "Gare du Nord", GARE, 200,null);
-        Terrain t27 = new Terrain(27,"Faubourg Saint-Honoré",TERRAIN,260,JAUNE);
-        Terrain t28 = new Terrain(28,"Place de la Bourse",TERRAIN,260,JAUNE);
-        Terrain t29 = new Terrain(29, "Compagnie de distribution des eaux",COMPAGNIE,150,GRIS);
-        Terrain t30 = new Terrain(30,"Rue de la Fayette",TERRAIN,280,JAUNE); 
+        Terrain t27 = new Terrain(27,"Faubourg Saint-Honoré",PROPRIETE,260,Color.yellow);
+        Terrain t28 = new Terrain(28,"Place de la Bourse",PROPRIETE,260,Color.yellow);
+        Terrain t29 = new Terrain(29, "Compagnie de distribution des eaux",COMPAGNIE,150,Color.gray);
+        Terrain t30 = new Terrain(30,"Rue de la Fayette",PROPRIETE,280,Color.yellow); 
         Special t31 = new Special(31,"Allez en Prison",PRISON);
-        Terrain t32 = new Terrain(32,"Avenue de Breteuil",TERRAIN,300,VERT);    
-        Terrain t33 = new Terrain(33,"Avenue Foch",TERRAIN,300,VERT);    
+        Terrain t32 = new Terrain(32,"Avenue de Breteuil",PROPRIETE,300,Color.green);    
+        Terrain t33 = new Terrain(33,"Avenue Foch",PROPRIETE,300,Color.green);    
         Special t34 = new Special(34,"Caisse de communauté",COMMUNAUTE);
-        Terrain t35 = new Terrain(35,"Boulevard des Capucines",TERRAIN,320,VERT);   
+        Terrain t35 = new Terrain(35,"Boulevard des Capucines",PROPRIETE,320,Color.green);   
         Terrain t36 = new Terrain(36, "Gare Saint-Lazare", GARE, 200,null);
         Special t37 = new Special(37,"Chance",CHANCE);
-        Terrain t38 = new Terrain(38,"Avenue des Champs-Elysées",TERRAIN,350,BLEUFONCE); 
+        Terrain t38 = new Terrain(38,"Avenue des Champs-Elysées",PROPRIETE,350,Color.blue); 
         Malus t39 = new Malus(39, "Taxe de Luxe", MALUS, 200);
-        Terrain t40 = new Terrain(40,"Rue de la Paix",TERRAIN,400,BLEUFONCE);    
+        Terrain t40 = new Terrain(40,"Rue de la Paix",PROPRIETE,400,Color.blue);    
         ArrayList<Carreau> casecar = new ArrayList();
         casecar.add(t1);
         casecar.add(t2);
@@ -351,6 +359,89 @@ public class Controler implements Observateur {
         return casecar;
     }
     
+    public ArrayList<Carte> initialiserHashMapCarte(){
+        //Carte chance
+        Action c1 = new Action(1,ACTION,CHANCE,"Vous êtes libéré de prison. Cette carte peut être conservée jusqu'à ce qu'elle soit utilisée.");
+        
+        Argent c3 = new Argent(3,ARGENT,CHANCE,"Vous êtes imposés pour les réparations de voirie à raison de : 40 € par maison et 115€ par hôtel.");
+        Argent c4 = new Argent(4, ARGENT,CHANCE, "Amende pour excès de vitesse : 15€");
+        Argent c5 = new Argent(5, ARGENT,CHANCE, "Faites des réparations dans toutes vos maisons : versez pour chaque maison 25€ et pour chaque hôtel 100€");
+        Argent c6 = new Argent(6, ARGENT,CHANCE, "Amende pour ivresse : 20€");
+        Argent c11 = new Argent(11, ARGENT,CHANCE,"Payez pour frais de scolarité : 150€");
+        Argent c12 = new Argent(12, ARGENT,CHANCE, "Vous avez gagné le prix de mots croisés. Recevez 100€");
+        Argent c13 = new Argent(13, ARGENT,CHANCE, "La Banque vous verse un dividende de 50€");
+        Argent c15 = new Argent(15, ARGENT,CHANCE, "Votre immeuble et votre prêt rapportent. Vous devez toucher 150€");
+        
+        Deplacement c2 = new Deplacement(2, DEPLACEMENT,CHANCE, "Reculez de trois cases");
+        Deplacement c7 = new Deplacement(7, DEPLACEMENT,CHANCE, "Avancez jusqu'à la case Départ");
+        Deplacement c8 = new Deplacement(8, DEPLACEMENT,CHANCE, "Allez en prison. Avancez tout droit en prison. Ne passez pas par la case Départ. Ne recevez pas 200€");
+        Deplacement c9 = new Deplacement(9, DEPLACEMENT,CHANCE, "Rendez-vous à l'Avenue Henri Martin. Si vous passez par la case Départ, recevez 200");
+        Deplacement c10 = new Deplacement(10, DEPLACEMENT,CHANCE, "Allez à la gare de Lyon. Si vous passez par la case Départ, recevez 200€.");
+        Deplacement c14 = new Deplacement(14, DEPLACEMENT,CHANCE, "Rendez-vous à la Rue de la Paix");
+        Deplacement c16 = new Deplacement(16, DEPLACEMENT,CHANCE, "Accédez au Boulevard de la Villette. Si vous passez par la case Départ, recevez 200€");
+        
+        //carte communauté
+        Action c17 = new Action(17,ACTION,COMMUNAUTE,"Vous êtes libéré de prison. Cette carte peut être conservée jusqu'à ce qu'elle soit utilisée.");
+        
+        Argent c18 = new Argent(18,ARGENT,COMMUNAUTE,"Payez une amende de 10€");        
+        Argent c19 = new Argent(19,ARGENT,COMMUNAUTE,"C'est votre anniversaire. Chaque joueur doit vous donner 10€");
+        Argent c20 = new Argent(20,ARGENT,COMMUNAUTE,"Erreur de la banque en votre faveur. Recevez 200€");        
+        Argent c22 = new Argent(22,ARGENT,COMMUNAUTE,"Payez la note du médecin : 50€");
+        Argent c23 = new Argent(23,ARGENT,COMMUNAUTE,"Les contributions vous remboursent la somme de 20€");
+        Argent c24 = new Argent(24,ARGENT,COMMUNAUTE,"Payez à l'hôpital 100€");        
+        Argent c25 = new Argent(25,ARGENT,COMMUNAUTE,"Vous héritez : 100€");
+        Argent c27 = new Argent(27,ARGENT,COMMUNAUTE,"Payez votre Police d'Assurance : 50€");
+        Argent c28 = new Argent(28,ARGENT,COMMUNAUTE,"La vente de votre stock vous rapporte : 50€");
+        Argent c30 = new Argent(30,ARGENT,COMMUNAUTE,"Recevez votre intérêt sur l'emprunt à 7% : 25€");
+        Argent c31 = new Argent(31,ARGENT,COMMUNAUTE,"Recevez votre revenu annuel : 100€");
+        Argent c32 = new Argent(32,ARGENT,COMMUNAUTE,"Vous avez gagné le deuxième prix de beauté : recevez 10€");
+        
+        Deplacement c21 = new Deplacement(21,DEPLACEMENT,COMMUNAUTE,"Retournez à Belleville");
+        Deplacement c26 = new Deplacement(24,DEPLACEMENT,COMMUNAUTE,"Allez en prison. Avancez tout droit en prison. Ne passez pas par la case Départ. Ne recevez pas 200€");
+        Deplacement c29 = new Deplacement(27,DEPLACEMENT,COMMUNAUTE,"Avancez jusqu'à la case Départ");
+        
+        
+        ArrayList<Carte> cartesComplet = new ArrayList();
+        cartesComplet.add(c1);
+        cartesComplet.add(c2);
+        cartesComplet.add(c3);
+        cartesComplet.add(c4);
+        cartesComplet.add(c5);
+        cartesComplet.add(c6);
+        cartesComplet.add(c7);
+        cartesComplet.add(c8);
+        cartesComplet.add(c9);
+        cartesComplet.add(c10);
+        cartesComplet.add(c11);
+        cartesComplet.add(c12);
+        cartesComplet.add(c13);
+        cartesComplet.add(c14);
+        cartesComplet.add(c15);
+        cartesComplet.add(c16);
+        cartesComplet.add(c17);
+        cartesComplet.add(c18);
+        cartesComplet.add(c19);
+        cartesComplet.add(c20);
+        cartesComplet.add(c21);
+        cartesComplet.add(c22);
+        cartesComplet.add(c23);
+        cartesComplet.add(c24);
+        cartesComplet.add(c25);
+        cartesComplet.add(c26);
+        cartesComplet.add(c27);
+        cartesComplet.add(c28);
+        cartesComplet.add(c29);
+        cartesComplet.add(c30);
+        cartesComplet.add(c31);
+        cartesComplet.add(c32);
+
+        
+        
+        return cartesComplet;
+        
+        
+    }   
+    
     public void pause(){
         System.out.println("Press \"ENTER\" to continue...");
         Scanner scanner = new Scanner(System.in);
@@ -384,7 +475,7 @@ public class Controler implements Observateur {
 
     @Override
     public void traiterMessage(Message m) {
-        faireAction(m);
+        faireAction(m);        
     }
     
 

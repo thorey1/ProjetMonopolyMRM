@@ -1,10 +1,26 @@
 package Model;
 
-import Controler.UtilsMono;
+
+import Enum.TypeCarreau;
+import Enum.TypeCarte;
+
+
 
 public class Action extends Carte {
+    
+    
 
-    public Action(int numCarte, UtilsMono.TypeCarreau type, String description, int prix) {
-        super(numCarte, type, description, prix);
+    public Action(int numCarte, TypeCarte type,TypeCarreau car, String description) {
+        super(numCarte, type, car, description);
     }
+
+    /*
+    public void getActionCarte() {
+        if (this.getNumCarte()==1 || this.getNumCarte()==17){
+            getJoueur().getCartesPrison().add(this);
+        }
+    }
+    */
+
+   
 }

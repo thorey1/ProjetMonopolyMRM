@@ -1,6 +1,8 @@
 package Model;
 
 import Controler.UtilsMono.*;
+import Enum.TypeCarreau;
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Joueur {
@@ -19,10 +21,11 @@ public class Joueur {
             this.prisonnier = false;
             setPosition(position);
             proprietes = new ArrayList();
+
         }
+        
+
        
-        
-        
         
 	public boolean getPrison() {
 		return prisonnier;
@@ -40,6 +43,9 @@ public class Joueur {
 	public void setPosition(Carreau position) {
 		this.position=position;
 	}
+        
+        
+        
 
         /**
          * @return the numJoueur
@@ -93,7 +99,7 @@ public class Joueur {
         
         public int getNbProp(Terrain t){
             int nb = 0;
-            Couleur c;
+            Color c;
             TypeCarreau tc = t.getTypeCarreau();
             
             if(tc == TypeCarreau.GARE || tc == TypeCarreau.COMPAGNIE){              
@@ -103,7 +109,7 @@ public class Joueur {
                     }
                 }
             }
-            else if(tc == TypeCarreau.TERRAIN){
+            else if(tc == TypeCarreau.PROPRIETE){
                 c = t.getCouleur();
                 for(Terrain terter : proprietes){             
                     if(terter.getCouleur()== c){
